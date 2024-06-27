@@ -8,6 +8,12 @@ export default {
     extend: {
       colors: {
         primary: '#3139de',
+        lblue: '#83a8fc',
+        mblue: '#6693fa',
+        dblue: '#1b3980',
+        mbrown: '#3b3333',
+        lbrown: '#5c5050',
+        dbrown: '#242020',
       },
     },
   },

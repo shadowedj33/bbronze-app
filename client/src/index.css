@@ -1,3 +1,44 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+/* LoginPage Styles in index.css */
+.login-container {
+    @apply flex justify-center items-center;
+  }
+  
+  .login-box {
+    @apply bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4 flex flex-col;
+  }
+  
+  .login-title {
+    @apply text-3xl font-bold text-center mb-4;
+  }
+  
+  .login-label {
+    @apply block text-gray-700 text-sm font-bold mb-2;
+  }
+  
+  .login-input {
+    @apply shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none;
+  }
+  
+  .login-password-input {
+    @apply login-input border-red-500 mb-3;
+  }
+  
+  .password-error {
+    @apply text-red-500 text-xs italic;
+  }
+  
+  .login-button {
+    @apply bg-dblue hover:bg-mblue text-white font-bold py-2 px-4 rounded focus:outline-none;
+  }
+  
+  .forgot-password-link {
+    @apply inline-block align-baseline font-bold text-sm text-mblue hover:text-dblue;
+  }
+
+  .create-account-link {
+    @apply bg-lbrown hover:bg-mbrown text-lblue font-thin py-2 px-4 mt-2 rounded-full focus:outline-none;
+  }
