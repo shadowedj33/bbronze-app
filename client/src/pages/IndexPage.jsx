@@ -3,7 +3,7 @@ export default function IndexPage() {
         <div>
             <div className='flex flex-col items-center justify-center h-screen'>
                 <h1 className='text-6xl font-bold'>Welcome to BBronze</h1>
-                <p className='text-lg'>Your one-stop shop for all things tanning</p>
+                <p className='text-lg'>Premium Mobile Tanning Sevice in the North Pittsburgh area.</p>
             </div>
         </div>
     )
