@@ -2,6 +2,15 @@
 @tailwind components;
 @tailwind utilities;
 
+
+/* input styles */
+input[type="text"],input[type="password"],
+input[type="email"],input[type="number"],
+input[type="tel"],
+textarea {
+  @apply shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none;
+}
+
 /* LoginPage Styles in index.css */
 .login-container {
     @apply flex justify-center items-center;
@@ -40,5 +49,5 @@
   }
 
   .create-account-link {
-    @apply bg-lbrown hover:bg-mbrown text-lblue font-thin py-2 px-4 mt-2 rounded-full focus:outline-none;
+    @apply text-lblue hover:text-dblue font-thin px-4 mt-4 focus:outline-none;
   }

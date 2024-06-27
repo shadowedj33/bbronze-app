@@ -7,10 +7,10 @@ export default function LoginPage() {
                 <div className='login-box'>
                     <h2 className='login-title'>Login</h2>
                     <div className='mb-4'>
-                        <label className='login-label' htmlFor='username'>
-                            Username
+                        <label className='login-label' htmlFor='email'>
+                            Email
                         </label>
-                        <input className='login-input' id='username' type='text' placeholder='Username' />
+                        <input className='login-input' id='username' type='email' placeholder='your@email.com' />
                     </div>
                     <div className='mb-6'>
                         <label className='login-label' htmlFor='password'>
@@ -29,8 +29,8 @@ export default function LoginPage() {
                     </div>
                     <div className='flex items-center justify-center'>
                         <div className='create-account-link' href='#'>
-                            No account yet? 
-                            <Link to={'/register'}> Register Here</Link>
+                            No account yet?  
+                            <Link to={'/register'} className="font-bold font-mblue underline">Register Here</Link>
                         </div>
                     </div>
                 </div>
