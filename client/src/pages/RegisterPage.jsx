@@ -11,7 +11,18 @@ export default function RegisterPage() {
 
     function registerUser(ev) {
         ev.preventDefault();
-        axios.get('http://localhost:3000/test');
+        if (password !== confirmPassword) {
+            alert('Passwords do not match');
+            return;
+        }
+        
+        axios.post('/register', {
+            name,
+            email,
+            phone,
+            password,
+            confirmPassword
+        });
     }
 
     return (
