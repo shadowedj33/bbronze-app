@@ -9,20 +9,25 @@ export default function RegisterPage() {
     const [password, setPassword] = useState('');
     const [confirmPassword, setConfirmPassword] = useState('');
 
-    function registerUser(ev) {
+    async function registerUser(ev) {
         ev.preventDefault();
         if (password !== confirmPassword) {
             alert('Passwords do not match');
             return;
         }
+        try {
+            await axios.post('/register', {
+                name,
+                email,
+                phone,
+                password,
+                confirmPassword
+            });
+            alert('Registration Successful. You can now log in');    
+        } catch (e) {
+            alert('The email or phone number already exists, please log in or reset your password');
+        }
         
-        axios.post('/register', {
-            name,
-            email,
-            phone,
-            password,
-            confirmPassword
-        });
     }
 
     return (
