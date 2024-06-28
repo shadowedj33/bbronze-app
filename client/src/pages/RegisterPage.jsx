@@ -1,10 +1,23 @@
+import { useState } from "react";
 import { Link } from "react-router-dom";
+import axios from "axios";
 
 export default function RegisterPage() {
+    const [name, setName] = useState('');
+    const [email, setEmail] = useState('');
+    const [phone, setPhone] = useState('');
+    const [password, setPassword] = useState('');
+    const [confirmPassword, setConfirmPassword] = useState('');
+
+    function registerUser(ev) {
+        ev.preventDefault();
+        axios.get('http://localhost:3000/test');
+    }
+
     return (
         <div className="mt-20 grow items-center justify-around">
             <div className="login-container">
-                <div className="login-box">
+                <form className="login-box" onSubmit={registerUser}>
                     <h2 className="login-title">Register</h2>
                     <div className="mb-4">
                         <label className="login-label" htmlFor="name">
@@ -15,6 +28,8 @@ export default function RegisterPage() {
                             id="name"
                             type="text"
                             placeholder="Jane Doe"
+                            value={name}
+                            onChange={ev => setName(ev.target.value)}
                         />
                     </div>
                     <div className="mb-4">
@@ -26,6 +41,8 @@ export default function RegisterPage() {
                             id="email"
                             type="email"
                             placeholder="jane@example.com"
+                            value={email}
+                            onChange={ev => setEmail(ev.target.value)}
                         />
                     </div>
                     <div className="mb-4">
@@ -37,6 +54,8 @@ export default function RegisterPage() {
                             id="phone"
                             type="tel"
                             placeholder="123-456-7890"
+                            value={phone}
+                            onChange={ev => setPhone(ev.target.value)}
                         />
                     </div>
                     <div className="mb-4">
@@ -48,6 +67,8 @@ export default function RegisterPage() {
                             id="password"
                             type="password"
                             placeholder="******************"
+                            value={password}
+                            onChange={ev => setPassword(ev.target.value)}
                         />
                     </div>
                     <div className="mb-4">
@@ -59,22 +80,21 @@ export default function RegisterPage() {
                             id="confirmPassword"
                             type="password"
                             placeholder="******************"
+                            value={confirmPassword}
+                            onChange={ev => setConfirmPassword(ev.target.value)}
                         />
                     </div>
                     <div className="flex items-center justify-between">
-                        <button className="login-button" type="button">
-                            Sign In
+                        <button className="login-button" type="submit">
+                            Register
                         </button>
-                        <a className="forgot-password-link" href="#">
-                            Forgot Password?
-                        </a>
                     </div>
                     <div className="flex items-center justify-center">
                         <div className="create-account-link" href="#">
                             Already have an Account? <Link to={"/login"}> Sign-in Here</Link>
                         </div>
                     </div>
-                </div>
+                </form>
             </div>
         </div>
     );
