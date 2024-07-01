@@ -1,11 +1,27 @@
+@import url('https://fonts.googleapis.com/css2?family=Asap&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=M+PLUS+1p:wght@500&display=swap');
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
+:root {
+  --font-asap: "Asap", sans-serif;
+  --font-mplus: "M PLUS 1p", sans-serif;
+}
 
+* {
+  scroll-behavior: smooth;
+}
+
+@layer base {
+  body {
+    @apply font-asap;
+  }
+}
 /* input styles */
 input[type="text"],input[type="password"],
-input[type="email"],input[type="number"],
+input[type="email"],input[type="number"], 
 input[type="tel"],
 textarea {
   @apply shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none;

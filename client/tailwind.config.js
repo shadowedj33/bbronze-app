@@ -15,6 +15,10 @@ export default {
         lbrown: '#5c5050',
         dbrown: '#242020',
       },
+      fontFamily: {
+        asap: "var(--font-asap)",
+        mplus: "var(--font-mplus)",
+      },
     },
   },
   plugins: [],

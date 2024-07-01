@@ -1,12 +1,15 @@
 import { Link } from "react-router-dom";
+import { bbronzelogo } from "../assets";
 
 export default function Header() {
     return(
         <div>
-            <header className='flex justify-between'>
-                <span className='font-bold text-3xl'>
-                BBronze
-                </span>
+            <header className='flex justify-between items-center font-mplus'>
+                <div className='flex justify-center'>
+                    <a className="flex" href="#">
+                        <img src={bbronzelogo} width={100} height={20} alt="bbronzelogo" className="justify-between items-center ml-3 mb-1" />
+                    </a>
+                </div>
                 <div className='flex gap-2 font-bold border border-gray-400 rounded-full py-2 px-4 shadow-md shadow-lbrown'>
                     <div>About</div>
                     <div className='border-l border-lbrown'></div>
