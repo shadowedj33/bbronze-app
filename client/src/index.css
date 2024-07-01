@@ -14,11 +14,6 @@
   scroll-behavior: smooth;
 }
 
-@layer base {
-  body {
-    @apply font-asap;
-  }
-}
 /* input styles */
 input[type="text"],input[type="password"],
 input[type="email"],input[type="number"], 
@@ -29,41 +24,46 @@ textarea {
 
 /* LoginPage Styles in index.css */
 .login-container {
-    @apply flex justify-center items-center;
-  }
-  
-  .login-box {
-    @apply bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4 flex flex-col;
-  }
-  
-  .login-title {
-    @apply text-3xl font-bold text-center mb-4;
-  }
-  
-  .login-label {
-    @apply block text-gray-700 text-sm font-bold mb-2;
-  }
-  
-  .login-input {
-    @apply shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none;
-  }
-  
-  .login-password-input {
-    @apply login-input border-red-500 mb-3;
-  }
-  
-  .password-error {
-    @apply text-red-500 text-xs italic;
-  }
-  
-  .login-button {
-    @apply bg-dblue hover:bg-mblue text-white font-bold py-2 px-4 rounded focus:outline-none;
-  }
-  
-  .forgot-password-link {
-    @apply inline-block align-baseline font-bold text-sm text-mblue hover:text-dblue;
-  }
+  @apply flex justify-center items-center;
+}
 
-  .create-account-link {
-    @apply text-lblue hover:text-dblue font-thin px-4 mt-4 focus:outline-none;
-  }
+.login-box {
+  @apply bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4 flex flex-col;
+}
+
+.login-title {
+  @apply text-3xl font-bold text-center mb-4;
+}
+
+.login-label {
+  @apply block text-gray-700 text-sm font-bold mb-2;
+}
+
+.login-input {
+  @apply shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none;
+}
+
+.login-password-input {
+  @apply login-input border-red-500 mb-3;
+}
+
+.password-error {
+  @apply text-red-500 text-xs italic;
+}
+
+.login-button {
+  @apply bg-dblue hover:bg-mblue text-white font-bold py-2 px-4 rounded-full focus:outline-none;
+}
+
+.forgot-password-link {
+  @apply inline-block align-baseline font-bold text-sm text-mblue hover:text-dblue;
+}
+
+.create-account-link {
+  @apply text-lblue hover:text-dblue font-thin px-4 mt-4 focus:outline-none;
+}
+
+.account-nav {
+  @apply shadow-md font-asap text-gray-200 px-4 py-2 bg-dblue rounded-full;
+}
+  
