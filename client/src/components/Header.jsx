@@ -9,13 +9,11 @@ export default function Header() {
         <div>
             <header className='flex justify-between items-center font-mplus'>
                 <div className='flex justify-center'>
-                    <Link to={'/'} className="flex items-center gap-1">
+                    <Link to={'/'} className="flex justify-end gap-1">
                         <img src={bbronzelogo} width={100} height={20} alt="bbronzelogo" className="justify-between items-center ml-3 mb-1" />
                     </Link>
                 </div>
-                <div className='flex gap-2 font-bold border border-gray-400 rounded-full py-2 px-4 shadow-md shadow-lbrown'>
-                    <div>About</div>
-                    <div className='border-l border-lbrown'></div>
+                <div className='flex text-mbrown gap-2 font-bold border border-gray-400 rounded-full py-2 px-4 shadow-md shadow-lbrown'>
                     <div>Services</div>
                     <div className='border-l border-lbrown'></div>
                     <div>Location</div>
@@ -29,7 +27,7 @@ export default function Header() {
                         </svg>
                     </button>
                 </div>
-                <Link to={user?'/account':'/login'} className='flex items-center gap-2 font-bold border border-gray-400 rounded-full py-2 px-4 shadow-md shadow-lbrown'>
+                <Link to={user?'/account':'/login'} className='flex justify-end items-center gap-2 font-bold border border-gray-400 rounded-full py-2 px-4 ml-2 shadow-md shadow-lbrown'>
                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="size-6">
                         <path strokeLinecap="round" strokeLinejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5" />
                     </svg>
