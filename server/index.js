@@ -9,7 +9,7 @@ require('dotenv').config()
 const app = express();
 
 const bcryptSalt = bcrypt.genSaltSync(10);
-const jwtSecret = 'jd90sdr34kr90vls0cvk4'
+const jwtSecret = process.env.JWT_SECRET;
 
 app.use(express.json());
 app.use(cookieParser());
@@ -23,7 +23,7 @@ mongoose.connect(process.env.MONGO_URL);
 app.get('/test', (req, res) => {
     res.json('BBronze Test');
 });
-// zSSDlKwFdy0ppyrc
+
 app.post('/register', async (req,res) => {
     const {name, email, phone, password} = req.body;
 
@@ -79,6 +79,30 @@ app.get('/profile', (req,res) => {
 
 app.post('/logout', (req,res) => {
     res.cookie('token', '').json(true);
+});
+
+app.post('/reviews', (req,res) => {
+    mongoose.connect(process.env.MONGO_URL);
+    const {token} = req.cookies;
+    const {
+        rating,
+        comment,
+        reviewPhotos,
+        serviceDate,
+        service
+    } = req.body;
+    jwt.verify(token, jwtSecret, {}, async (err, userData) => {
+        if (err) throw err;
+        const reviewDoc = await Review.create({
+            owner:userData.id,
+            rating,
+            comment,
+            reviewPhotos,
+            serviceDate,
+            service,
+        });
+        res.json(reviewDoc);
+    });
 });
 
 app.listen(3000);
