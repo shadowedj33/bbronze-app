@@ -14,11 +14,11 @@ export default function Header() {
                     </Link>
                 </div>
                 <div className='flex text-mbrown gap-2 font-bold border border-gray-400 rounded-full py-2 px-4 shadow-md shadow-lbrown'>
-                    <div>Services</div>
+                    <a href="#services" className="cursor-pointer">Services</a>
                     <div className='border-l border-lbrown'></div>
-                    <div>Location</div>
+                    <a href="#location" className="cursor-pointer">Location</a>
                     <div className='border-l border-lbrown'></div>
-                    <div>Product Info</div>
+                    <a href="#productinfo" className="cursor-pointer">Sjolie</a>
                     <div className='border-l border-lbrown'></div>
                     <button className='flex bg-dblue text-gray-200 rounded-full border border-dblue'>
                         Book Now

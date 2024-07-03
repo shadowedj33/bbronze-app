@@ -1,7 +1,7 @@
 /* eslint-disable no-unused-vars */
 import React, { useEffect, useState } from "react";
 import { Link, useParams } from "react-router-dom";
-import RatingReview from "../components/RatingReview";
+import AccountNav from "../components/AccountNav";
 import axios from "axios";
 
 export default function ReviewsPage() {
@@ -15,6 +15,7 @@ export default function ReviewsPage() {
 
     return (
         <div>
+            <AccountNav />
                 <div className="text-center">
                     <Link className="inline-flex gap-1 py-2 bg-lbrown text-lblue font-asap px-6 rounded-full" to={'/account/reviews/new'}>
                         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="size-6">
