@@ -4,6 +4,7 @@ const mongoose = require('mongoose');
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 const User = require('./models/User');
+const Review = require('./models/Review');
 const cookieParser = require('cookie-parser');
 require('dotenv').config()
 const app = express();
@@ -103,6 +104,21 @@ app.post('/reviews', (req,res) => {
         });
         res.json(reviewDoc);
     });
+});
+
+app.get('/user-reviews', (req,res) => {
+    mongoose.connect(process.env.MONGO_URL);
+    const {token} = req.cookies;
+    jwt.verify(token, jwtSecret, {}, async (err, userData) => {
+        const {id} = userData;
+        res.json(await Review.find({owner:id}));
+    });
+});
+
+app.get('/reviews/:id', async (req,res) => {
+    mongoose.connect(process.env.MONGO_URL);
+    const {id} = req.params;
+    res.json(await Review.findById(id));
 });
 
 app.listen(3000);

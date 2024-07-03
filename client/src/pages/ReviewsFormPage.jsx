@@ -44,10 +44,14 @@ export default function ReviewsFormPage() {
             comment,
             reviewPhotos,
             serviceDate,
-            service
+            service,
         };
         if (id) {
-            await axios.put('/reviews/'+id, reviewData);
+            await axios.put('/reviews', {
+                id,
+                ...reviewData
+            });
+            setRedirect(true);
         } else {
             await axios.post('/reviews', reviewData);
             setRedirect(true);
@@ -64,15 +68,15 @@ export default function ReviewsFormPage() {
             <form onSubmit={saveReview}>
                 <div>
                     <label className="font-asap text-xl mt-4 font-bold">Rating</label>
-                    <RatingReview rating={rating} setRating={setRating} />
+                    <RatingReview rating={rating} setRating={setRating} value={rating} onChange={ev => setRating(ev.target.value)} />
                 </div>
                 <div className="inline-block">
                     <label className="font-asap text-xl mt-4 font-bold">Comments</label>
-                    <textarea className="bg-mblue rounded-full text-mbrown mx-2 my-2" id="comment" name="comment" required />
+                    <textarea className="bg-mblue rounded-full text-mbrown mx-2 my-2" value={comment} onChange={ev => setComment(ev.target.value)} required />
                 </div>
                 <div className="mt-2">
                     <label className="font-asap text-xl font-bold">Photos</label>
-                    <button className="bg-lbrown rounded-full text-center text-lblue mx-2 my-2 px-5 translate-y-2 text-2xl"  onClick={handleClick}>
+                    <button className="bg-lbrown rounded-full text-center text-lblue mx-2 my-2 px-5 translate-y-2 text-2xl" value={reviewPhotos} onChange={ev => setReviewPhotos(ev.target.value)} onClick={handleClick}>
                         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="size-8">
                             <path strokeLinecap="round" strokeLinejoin="round" d="m2.25 15.75 5.159-5.159a2.25 2.25 0 0 1 3.182 0l5.159 5.159m-1.5-1.5 1.409-1.409a2.25 2.25 0 0 1 3.182 0l2.909 2.909m-18 3.75h16.5a1.5 1.5 0 0 0 1.5-1.5V6a1.5 1.5 0 0 0-1.5-1.5H3.75A1.5 1.5 0 0 0 2.25 6v12a1.5 1.5 0 0 0 1.5 1.5Zm10.5-11.25h.008v.008h-.008V8.25Zm.375 0a.375.375 0 1 1-.75 0 .375.375 0 0 1 .75 0Z" />
                         </svg>
@@ -80,11 +84,11 @@ export default function ReviewsFormPage() {
                 </div>
                 <div className="mt-4">
                     <label className="font-asap text-xl font-bold">Service Date</label>
-                    <input className="bg-lbrown rounded-full text-lblue px-2 mx-2 my-2" type="date" id="serviceDate" name="serviceDate" required />
+                    <input className="bg-lbrown rounded-full text-lblue px-2 mx-2 my-2" type="date" value={serviceDate} onChange={ev => setServiceDate(ev.target.value)} required />
                 </div>
                 <div className="mt-4">
                     <label className="font-asap text-xl font-bold">Service</label>
-                    <select className="bg-lbrown rounded-full text-lblue px-2 mx-2 my-2" id="service" name="service" required>
+                    <select className="bg-lbrown rounded-full text-lblue px-2 mx-2 my-2" value={service} onChange={ev => setService(ev.target.value)} required>
                         <option value="1">Partial Body Spray</option>
                         <option value="2">Full Body Spray</option>
                         <option value="3">Contouring</option>
