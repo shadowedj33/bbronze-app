@@ -1,7 +1,7 @@
 export default function Products() {
     return (
-        <div>
-            Products section
+        <div className="font-dscript text-5xl font-bold text-lbrown">
+            Sjolie Tanning Solution
         </div>
     );
 }

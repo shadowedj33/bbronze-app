@@ -17,12 +17,12 @@ export default function IndexPage() {
                     <Services />
                 </div>
                 <div className="index-container">
-                    <h1 className='text-5xl font-bold font-asap text-center mt-4 mb-4 underline text-lbrown'>Location</h1>
-                    <h2 className='text-2xl font-bold font-mplus text-center mt-4 mb-4 text-lbrown'>Below is the area we service. Closer location means no service fee, farther is a small fee.</h2>
-                    <Location />
+                    <Products />
                 </div>
                 <div className="index-container">
-                    <Products />
+                    <h1 className='text-6xl font-bold font-dscript text-center mt-4 mb-2 text-lbrown'>Location</h1>
+                    <h2 className='text-2xl font-bold font-mplus text-center mt-4 mb-4 text-lbrown'>Below is the area we service. Closer location means no service fee, farther is a small fee.</h2>
+                    <Location />
                 </div>
             </div>
             <div>

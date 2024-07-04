@@ -6,7 +6,6 @@ export default function Location() {
     const center = [40.684934, -80.065723]
     const blueOptions = { color: '#83a8fc'}
     const dblueOptions = { color: '#1b3980'}
-    const fillClear = { fillColor: '#83a8fc' }
     return (
         <MapContainer center={center} zoom={10} style={{ height: "400px", width: "75%" }}>
             <TileLayer
