@@ -1,5 +1,6 @@
 @import url('https://fonts.googleapis.com/css2?family=Asap&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=M+PLUS+1p:wght@500&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Dancing+Script:wght@500&display=swap');
 
 @tailwind base;
 @tailwind components;
@@ -8,6 +9,7 @@
 :root {
   --font-asap: "Asap", sans-serif;
   --font-mplus: "M PLUS 1p", sans-serif;
+  --font-dscript: "Dancing Script", cursive;
 }
 
 * {

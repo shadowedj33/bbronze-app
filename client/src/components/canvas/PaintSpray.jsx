@@ -21,7 +21,7 @@ const PaintSpray = () => {
     
             velocities[i] = new THREE.Vector3((Math.random() - 0.5) * 2, Math.random() * 5, (Math.random() - 0.5) * 2);
     
-            color.set('#242020');
+            color.set('#3b3333');
             colors.set(color.toArray(), i * 3);
     
             sizes[i] = Math.random() * 0.5 + 0.1; // Randomize particle size for a more natural look

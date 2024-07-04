@@ -18,6 +18,7 @@ export default {
       fontFamily: {
         asap: "var(--font-asap)",
         mplus: "var(--font-mplus)",
+        dscript: "var(--font-dscript)",
       },
     },
   },
