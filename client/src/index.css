@@ -74,3 +74,7 @@ textarea {
   height: 100vh;
   width: 100wh;
 }
+
+.index-container {
+  @apply container bg-mblue rounded-lg shadow-md shadow-lbrown flex flex-col items-center justify-normal mt-4 pb-4 pt-4 mx-auto w-full max-w-4xl;
+}
