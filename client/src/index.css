@@ -66,4 +66,9 @@ textarea {
 .account-nav {
   @apply shadow-md font-asap text-gray-200 px-4 py-2 bg-dblue rounded-full;
 }
-  
+
+/* Leaflet container style */
+.leaflet-container {
+  height: 100vh;
+  width: 100wh;
+}
