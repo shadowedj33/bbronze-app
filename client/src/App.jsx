@@ -9,6 +9,9 @@ import ProfilePage from "./pages/ProfilePage.jsx";
 import ReviewsPage from "./pages/ReviewsPage.jsx";
 import ReviewsFormPage from "./pages/ReviewsFormPage.jsx";
 import BookingsPage from "./pages/BookingsPage.jsx";
+import BookingPage from "./pages/BookingPage.jsx";
+import ProductsPage from "./pages/ProductsPage.jsx";
+
 
 
 axios.defaults.baseURL = "http://localhost:3000/";
@@ -26,6 +29,8 @@ function App() {
           <Route path="/account/reviews" element={<ReviewsPage />} />
           <Route path="/account/reviews/new" element={<ReviewsFormPage />} />
           <Route path="/account/bookings" element={<BookingsPage />} />
+          <Route path="/booking" element={<BookingPage />} />
+          <Route path="/products" element={<ProductsPage />} />
         </Route>
         
       </Routes>

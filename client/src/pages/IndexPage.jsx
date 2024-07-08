@@ -2,7 +2,6 @@
 
 import About from "../components/About";
 import Location from "../components/Location";
-import Products from "../components/Products";
 import Services from "../components/Services";
 
 
@@ -15,9 +14,6 @@ export default function IndexPage() {
                 </div>
                 <div className="index-container">
                     <Services />
-                </div>
-                <div className="index-container">
-                    <Products />
                 </div>
                 <div className="index-container">
                     <h1 className='text-6xl font-bold font-dscript text-center mt-4 mb-2 text-lbrown'>Location</h1>

@@ -1,3 +1,9 @@
 import bbronzelogo from "./bbronzelogo.png";
+import sjolie from "./sjolie.png";
+import ingredientList from "./ingredientList.pdf";
 
-export { bbronzelogo };
+export {
+    bbronzelogo,
+    sjolie,
+    ingredientList,
+};

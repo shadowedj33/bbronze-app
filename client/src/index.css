@@ -76,7 +76,7 @@ textarea {
 }
 
 .index-container {
-  @apply container bg-mblue rounded-lg shadow-md shadow-lbrown flex flex-col items-center justify-normal mt-4 pb-4 pt-4 mx-auto w-full max-w-4xl;
+  @apply container bg-lblue rounded-lg shadow-md shadow-lbrown flex flex-col items-center justify-normal mt-4 pb-4 pt-4 mx-auto w-full max-w-4xl;
 }
 
 .services-section {
@@ -90,4 +90,19 @@ textarea {
   border: 1px solid;
   padding: 20px;
   border-radius: 5px;
+}
+
+.services-containers {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  gap: 20px;
+  flex-wrap: wrap;
+  align-items: center;
+}
+
+@media (max-width: 768px) {
+  .services-containers {
+    flex-direction: column;
+  }
 }

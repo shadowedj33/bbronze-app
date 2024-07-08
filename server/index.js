@@ -121,4 +121,22 @@ app.get('/reviews/:id', async (req,res) => {
     res.json(await Review.findById(id));
 });
 
+app.post('/bookings', async (req, res) => {
+    mongoose.connect(process.env.MONGO_URL);
+    const {token} = req.cookies;
+    const {service, date, location, time, clientInfo} = req.body;
+    jwt.verify(token, jwtSecret, {}, async (err, userData) => {
+        if (err) throw err;
+        const bookingDoc = await Booking.create({
+            user:userData.id,
+            service,
+            date,
+            location,
+            time,
+            clientInfo,
+        });
+        res.json(bookingDoc);
+    });
+})
+
 app.listen(3000);
