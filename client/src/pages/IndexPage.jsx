@@ -1,5 +1,6 @@
 // import Scene from "../components/canvas/Scene";
 
+import About from "../components/About";
 import Location from "../components/Location";
 import Products from "../components/Products";
 import Services from "../components/Services";
@@ -10,8 +11,7 @@ export default function IndexPage() {
         <div>
             <div className="flex flex-col items-center justify-center min-h-screen">
                 <div className='index-container'>
-                    <h1 className='text-6xl font-bold font-dscript text-center mt-4 text-lbrown'>BBronze Mobile Spray Tanning</h1>
-                    <p className='text-lg text-mbrown font-asap'>Premium Mobile Tanning Sevice in the North Pittsburgh area.</p>
+                    <About />
                 </div>
                 <div className="index-container">
                     <Services />

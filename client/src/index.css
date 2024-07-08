@@ -78,3 +78,16 @@ textarea {
 .index-container {
   @apply container bg-mblue rounded-lg shadow-md shadow-lbrown flex flex-col items-center justify-normal mt-4 pb-4 pt-4 mx-auto w-full max-w-4xl;
 }
+
+.services-section {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+}
+
+.pricing-services-container, .specials-packages-container {
+  border: 1px solid;
+  padding: 20px;
+  border-radius: 5px;
+}
