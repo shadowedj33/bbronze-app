@@ -3,6 +3,7 @@
 import Heading from "../components/Heading";
 import Location from "../components/Location";
 import About from "../components/About";
+import Hero from "../components/Hero";
 
 
 export default function IndexPage() {
@@ -11,6 +12,9 @@ export default function IndexPage() {
             <div className="flex flex-col items-center justify-center min-h-screen">
                 <div className='index-container'>
                     <Heading />
+                </div>
+                <div className="index-container">
+                    <Hero />
                 </div>
                 <div className="index-container">
                     <About />

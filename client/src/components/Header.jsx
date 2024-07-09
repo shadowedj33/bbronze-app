@@ -10,7 +10,7 @@ export default function Header() {
             <header className='flex justify-between items-center font-mplus'>
                 <div className='flex justify-center'>
                     <Link to={'/'} className="flex justify-end gap-1">
-                        <img src={bbronzelogo} width={100} height={20} alt="bbronzelogo" className="justify-between items-center ml-3 mb-1" />
+                        <img src={bbronzelogo} width={80} height={80} alt="bbronzelogo" className="justify-between items-center ml-3 mb-1 rounded-full" />
                     </Link>
                 </div>
                 <div className='flex text-mbrown gap-2 font-bold border border-mblue rounded-full py-2 px-4 shadow-md shadow-dbrown' style={{ background: 'linear-gradient(to left, #5c5050, #83a8fc)' }}>

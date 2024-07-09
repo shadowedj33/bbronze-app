@@ -10,8 +10,8 @@ const serviceSchema = new mongoose.Schema({
         type: String,
         required: true,
     },
-    durationMinutes: {
-        type: Number,
+    processingTime: {
+        type: String,
         required: true,
     },
     price: {
@@ -20,6 +20,10 @@ const serviceSchema = new mongoose.Schema({
     },
     addOns: [{
         name: {
+            type: String,
+            required: true,
+        },
+        description: {
             type: String,
             required: true,
         },

@@ -6,8 +6,7 @@ export default function ServicesPage() {
             <div className="font-dscript font-bold text-lblue text-5xl">
                 Services and Price List
             </div>
-            <div className="services-containers">
-                <div className="pricing-services-container">
+                <div className="index-container">
                     <h2>Pricing & Services</h2>
                     <ul>
                         <li>1 Partial Body Spray - $35</li>
@@ -23,15 +22,14 @@ export default function ServicesPage() {
                     <br />
                     <Link to={'/booking'} className="login-button">Book Now</Link>
                 </div>
-                <div className="specials-packages-container">
-                    <h2>Specials/Packages</h2>
-                    <ul>
-                        <li>Bridal Parties & Groups of 4+ - 20% off</li>
-                        <li>Birthdays - 50% off</li>
-                    </ul>
-                    <br />
-                    <Link to={'/booking'} className="login-button">Book Now</Link>
-                </div>
+            <div className="index-container">
+                <h2>Specials/Packages</h2>
+                <ul>
+                    <li>Bridal Parties & Groups of 4+ - 20% off</li>
+                    <li>Birthdays - 50% off</li>
+                </ul>
+                <br />
+                <Link to={'/booking'} className="login-button">Book Now</Link>
             </div>
         </div>
     )
