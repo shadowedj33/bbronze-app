@@ -1,14 +1,10 @@
-import { Link } from "react-router-dom";
-import { sjolie, ingredientList } from "../assets";
+import { ingredientList, sjoliesunless, skintype } from "../assets";
 
 export default function ProductsPage() {
     return (
         <div className="products-page">
             <div className="flex justify-center">
-                <div className="font-dscript text-center text-6xl pt-4 font-bold text-lblue">
-                    Sjolie Tanning Solution
-                </div>
-                <img src={sjolie} alt="sjolie" height={90} width={90} />
+                <img src={sjoliesunless} alt="sjolie" />
                 
             </div>
             <p className="text-lg text-center font-mplus font-bold text-dbrown">
@@ -18,9 +14,16 @@ export default function ProductsPage() {
                 Complemented by aloe vera to add and lock in moisture, and Vitamin C for its anti-aging properties.
                 Free of cruelty, gluten, parabens, erythrulose, urea, and minerals.
             </p>
-            <div>
+            <br />
+            <div className="login-button">
                 <a href={ingredientList} rel="noreferrer" target="_blank">
                     Ingredient List
+                </a>
+            </div>
+            <br />
+            <div className="login-button">
+                <a href={skintype} rel="noreferrer" target="_blank">
+                    Skin Type Guide
                 </a>
             </div>
         </div>

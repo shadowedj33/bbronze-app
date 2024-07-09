@@ -1,10 +1,14 @@
+import { Link } from "react-router-dom";
+import { brennaphoto } from "../assets";
+
 export default function About() {
     return (
-        <div>
-            <h1 className='text-6xl font-bold font-dscript text-center mt-4 text-lbrown'>BBronze Mobile Spray Tanning</h1>
-            <p className='text-lg text-mbrown font-asap px-2 py-2 text-center'>Welcome to BBronze Mobile Tanning! My name is Brenna, proud owner and your personal tanning guru! I offer flawless airbrush tanning in North Pittsburgh and surrounding areas-all from the convenience of your home. With my expertise in color theory and a diverse range of formulas for every skin tone, I&apos;ll transform your dream tan into a radiant reality! </p>
-            <h2 className="text-4xl font-bold font-dscript text-center mt-4 text-lbrown">Why Choose BBronze?</h2>
-            <p className='text-lg text-mbrown font-asap px-2 py-2 text-center'>BBronze is dedicated to providing a safe, natural-looking tan that is customized to your skin tone and desired level of darkness. I use only the highest quality, organic, and vegan solutions that are free of parabens, sulfates, and gluten. My goal is to make you feel comfortable and confident in your skin, so I take the time to understand your needs and preferences. Whether you&apos;re looking for a subtle glow or a deep bronze, I&apos;ll create a custom blend that enhances your natural beauty. </p>
+        <div className="flex flex-col items-center">
+            <h1 className='text-5xl font-bold font-dscript text-center mt-4 mb-2 text-lbrown'>About The Owner</h1>
+            <div className="flex flex-col md:flex-row items-center py-4">
+                <img src={brennaphoto} alt="brennaphoto" height={520} width={350} className="rounded-xl ml-12 mr-4" />  
+                <p className="p-4 text-xl font-asap text-mbrown text-center mx-4">Personally, I have always had very sensitive skin. Burns instantly in the sun, and hates any type of chemicals. Typically, spray tans would cause me to break out in itchy hives on my neck, hips, in between elbows, etc. Most brands have harsh, unnatural additives, causing people with sensitive skin (like myself) to have a negative reaction and steer clear of fake tans forever. However, with <Link className="font-bold underline" to={'/products'}>SJOLIE</Link>, those with sensitive skin can achieve the perfect tan they have always dreamed of. </p>
+            </div>
         </div>
     );
 }

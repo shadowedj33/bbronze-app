@@ -11,6 +11,7 @@ import ReviewsFormPage from "./pages/ReviewsFormPage.jsx";
 import BookingsPage from "./pages/BookingsPage.jsx";
 import BookingPage from "./pages/BookingPage.jsx";
 import ProductsPage from "./pages/ProductsPage.jsx";
+import ServicesPage from "./pages/ServicesPage.jsx";
 
 
 
@@ -31,6 +32,7 @@ function App() {
           <Route path="/account/bookings" element={<BookingsPage />} />
           <Route path="/booking" element={<BookingPage />} />
           <Route path="/products" element={<ProductsPage />} />
+          <Route path="/services" element={<ServicesPage />} />
         </Route>
         
       </Routes>

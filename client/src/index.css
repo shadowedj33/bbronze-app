@@ -76,7 +76,7 @@ textarea {
 }
 
 .index-container {
-  @apply container bg-lblue rounded-lg shadow-md shadow-lbrown flex flex-col items-center justify-normal mt-4 pb-4 pt-4 mx-auto w-full max-w-4xl;
+  @apply container bg-lblue rounded-lg shadow-md shadow-lbrown flex flex-col items-center justify-normal py-4 my-8 mx-auto w-full max-w-4xl;
 }
 
 .services-section {
@@ -105,4 +105,13 @@ textarea {
   .services-containers {
     flex-direction: column;
   }
+}
+
+.products-page {
+  display: flex;
+  flex-direction: column;
+  max-width: 75%;
+  gap: 2px;
+  align-items: center;
+  margin: 0 auto; /* Add this line to center align the products page */
 }

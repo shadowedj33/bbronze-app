@@ -1,8 +1,8 @@
 // import Scene from "../components/canvas/Scene";
 
-import About from "../components/About";
+import Heading from "../components/Heading";
 import Location from "../components/Location";
-import Services from "../components/Services";
+import About from "../components/About";
 
 
 export default function IndexPage() {
@@ -10,10 +10,10 @@ export default function IndexPage() {
         <div>
             <div className="flex flex-col items-center justify-center min-h-screen">
                 <div className='index-container'>
-                    <About />
+                    <Heading />
                 </div>
                 <div className="index-container">
-                    <Services />
+                    <About />
                 </div>
                 <div className="index-container">
                     <h1 className='text-6xl font-bold font-dscript text-center mt-4 mb-2 text-lbrown'>Location</h1>

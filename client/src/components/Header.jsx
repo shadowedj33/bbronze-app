@@ -14,9 +14,7 @@ export default function Header() {
                     </Link>
                 </div>
                 <div className='flex text-mbrown gap-2 font-bold border border-mblue rounded-full py-2 px-4 shadow-md shadow-dbrown' style={{ background: 'linear-gradient(to left, #5c5050, #83a8fc)' }}>
-                    <a href="#services" className="cursor-pointer">Services</a>
-                    <div className='border-l border-lbrown'></div>
-                    <a href="#location" className="cursor-pointer">Location</a>
+                    <a href="/services" className="cursor-pointer">Services</a>
                     <div className='border-l border-lbrown'></div>
                     <a href="/products" className="cursor-pointer">Sjolie</a>
                     <div className='border-l border-lbrown'></div>
