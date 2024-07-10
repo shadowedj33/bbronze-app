@@ -119,3 +119,28 @@ textarea {
 .page-heading {
   @apply font-dscript font-bold text-lblue text-5xl
 }
+
+.spinning-image {
+  animation: spin 8s linear infinite;
+}
+
+@keyframes spin {
+  0% { 
+    transform: rotate(0deg); 
+  }
+  100% { 
+    transform: rotate(360deg);
+  }
+}
+
+.image-container {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.wordslogo-image {
+  position: absolute;
+  z-index: 2;
+}

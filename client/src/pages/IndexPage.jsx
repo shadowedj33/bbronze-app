@@ -10,7 +10,7 @@ export default function IndexPage() {
     return (
         <div>
             <div className="flex flex-col items-center justify-center min-h-screen">
-                <div className='index-container'>
+                <div className=''>
                     <Heading />
                 </div>
                 <div className="index-container">
