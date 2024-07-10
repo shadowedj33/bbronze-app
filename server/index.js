@@ -6,13 +6,11 @@ const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 const User = require('./models/User');
 const Review = require('./models/Review');
-const Service = require('./models/Service');
 const cookieParser = require('cookie-parser');
-const Services = require('./models/Service');
-
+const { MongoClient } = require('mongodb');
+const client = new MongoClient(process.env.MONGO_URL);
 require('dotenv').config();
 const app = express();
-
 const bcryptSalt = bcrypt.genSaltSync(10);
 const jwtSecret = process.env.JWT_SECRET;
 
@@ -24,24 +22,10 @@ app.use(cors({
 }));
 app.use(require('body-parser').urlencoded({ extended: false }));
 
-const services_data = JSON.parse(fs.readFileSync("./data/services.json", 'utf8'));
-
 mongoose.connect(process.env.MONGO_URL);
 
 
-try {
-    Services.deleteMany({}).then(() => {
-        Services.insertMany(services_data, (err, docs) => {
-            if (err) {
-                res.status(500).json({ error: 'Error fetching Services' });
-            } else {
-                console.log('Services inserted successfully');
-            }
-        });
-    });
-} catch (e) {
-    res.status(500).json({ error: 'Error fetching Services' });
-}
+
 
 app.get('/api/test', (req, res) => {
     res.json('BBronze Test');
