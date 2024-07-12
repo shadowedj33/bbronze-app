@@ -1,14 +1,14 @@
-import { Schema, model } from "mongoose";
+import mongoose from "mongoose";
 
-const bookingSchema = new Schema(
+const bookingSchema = new mongoose.Schema(
   {
     user: {
-      type: Schema.Types.ObjectId,
+      type: mongoose.Types.ObjectId,
       ref: "User",
       required: true,
     },
     service: {
-      type: Schema.Types.ObjectId,
+      type: mongoose.Types.ObjectId,
       ref: "Service",
       required: true,
     },
@@ -31,7 +31,7 @@ const bookingSchema = new Schema(
       default: "pending",
     },
     clientInfo: {
-      type: Schema.Types.ObjectId,
+      type: mongoose.Types.ObjectId,
       ref: "ClientInfo",
       required: true,
     },
@@ -39,6 +39,4 @@ const bookingSchema = new Schema(
   { timestamps: true }
 );
 
-const Booking = model("Booking", bookingSchema);
-
-export default Booking;
+export default mongoose.model("Booking", bookingSchema);

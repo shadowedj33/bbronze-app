@@ -1,9 +1,13 @@
-import { Schema, model } from "mongoose";
+import mongoose from "mongoose";
 
-const reviewSchema = new Schema(
+const reviewSchema = new mongoose.Schema(
   {
+    serviceId: {
+      type: mongoose.Types.ObjectId,
+      ref: "Service",
+    },
     owner: {
-      type: Schema.Types.ObjectId,
+      type: mongoose.Types.ObjectId,
       ref: "User",
     },
     rating: {
@@ -18,11 +22,6 @@ const reviewSchema = new Schema(
       type: [String],
       required: false,
     },
-    service: {
-      type: [String],
-      ref: "Service",
-      required: true,
-    },
     serviceDate: {
       type: Date,
       required: true,
@@ -33,6 +32,4 @@ const reviewSchema = new Schema(
   }
 );
 
-const Review = model("Review", reviewSchema);
-
-export default Review;
+export default mongoose.model("Review", reviewSchema);
