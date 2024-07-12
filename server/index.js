@@ -6,7 +6,6 @@ const jwt = require("jsonwebtoken");
 const User = require("./models/User");
 const Review = require("./models/Review");
 const cookieParser = require("cookie-parser");
-const bodyParser = require('body-parser');
 require("dotenv").config();
 const app = express();
 const bcryptSalt = bcrypt.genSaltSync(10);
@@ -120,5 +119,6 @@ app.get("/api/reviews/:id", async (req, res) => {
   const { id } = req.params;
   res.json(await Review.findById(id));
 });
+
 
 app.listen(3000);

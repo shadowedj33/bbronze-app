@@ -1,36 +1,28 @@
-import { Link } from "react-router-dom";
+// eslint-disable-next-line no-unused-vars
+import React, { useEffect, useState } from "react";
+import axios from "axios";
 
 export default function ServicesPage() {
+    const [services, setServices] = useState([]);
+
+    useEffect(() => {
+        axios.get('services').then(response => {
+            setServices(response.data);
+        })
+    }, []);
+
     return (
-        <div className="services-section">
-            <div className="font-dscript font-bold text-lblue text-5xl">
-                Services and Price List
-            </div>
-                <div className="index-container">
-                    <h2>Pricing & Services</h2>
-                    <ul>
-                        <li>1 Partial Body Spray - $35</li>
-                        <li>3 Partial Body Sprays - $50</li>
-                        <li>1 Full Body Spray - $65</li>
-                        <li>3 Full Body Sprays - $165</li>
-                    </ul>
-                    <h2>Add-ons</h2>
-                    <ul>
-                        <li>Light Contour - $5</li>
-                        <li>Intense Contour - $15</li>
-                    </ul>
-                    <br />
-                    <Link to={'/booking'} className="login-button">Book Now</Link>
-                </div>
-            <div className="index-container">
-                <h2>Specials/Packages</h2>
-                <ul>
-                    <li>Bridal Parties & Groups of 4+ - 20% off</li>
-                    <li>Birthdays - 50% off</li>
-                </ul>
-                <br />
-                <Link to={'/booking'} className="login-button">Book Now</Link>
+        <div>
+            <h1 className="text-3xl font-bold text-center">Services</h1>
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+                {services.map((service, i) => (
+                    <div key={i} className="bg-white shadow-md rounded-lg p-4">
+                        <h2 className="text-xl font-bold">{service.name}</h2>
+                        <p>{service.description}</p>
+                        <p>Price: ${service.price}</p>
+                    </div>
+                ))}
             </div>
         </div>
-    )
+    );
 }

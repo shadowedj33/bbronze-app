@@ -35,7 +35,7 @@ const addOnSchema = new mongoose.Schema({
     }
 });
 
-const Service = mongoose.model("Service", serviceSchema);
-const AddOn = mongoose.model("AddOn", addOnSchema);
+const Services = mongoose.model("Services", serviceSchema);
+const AddOns = mongoose.model("AddOns", addOnSchema);
 
-module.exports = { Service, AddOn };
+module.exports = { Services, AddOns };
