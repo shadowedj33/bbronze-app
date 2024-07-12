@@ -1,6 +1,6 @@
-const mongoose = require("mongoose");
+import { Schema, model } from "mongoose";
 
-const serviceSchema = new mongoose.Schema({
+const serviceSchema = new Schema({
   name: {
     type: String,
     required: true,
@@ -20,7 +20,7 @@ const serviceSchema = new mongoose.Schema({
   }
 });
 
-const addOnSchema = new mongoose.Schema({
+const addOnSchema = new Schema({
     name: {
         type: String,
         required: true,
@@ -35,7 +35,7 @@ const addOnSchema = new mongoose.Schema({
     }
 });
 
-const Services = mongoose.model("Services", serviceSchema);
-const AddOns = mongoose.model("AddOns", addOnSchema);
+const Services = model("Services", serviceSchema);
+const AddOns = model("AddOns", addOnSchema);
 
-module.exports = { Services, AddOns };
+export default { Services, AddOns };

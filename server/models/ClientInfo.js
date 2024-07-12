@@ -1,8 +1,8 @@
-const mongoose = require("mongoose");
+import { Schema, model } from "mongoose";
 
-const clientInfoSchema = new mongoose.Schema({
+const clientInfoSchema = new Schema({
   user: {
-    type: mongoose.Schema.Types.ObjectId,
+    type: Schema.Types.ObjectId,
     ref: "User",
     required: true,
   },
@@ -77,6 +77,6 @@ const clientInfoSchema = new mongoose.Schema({
   },
 });
 
-const ClientInfo = mongoose.model("ClientInfo", clientInfoSchema);
+const ClientInfo = model("ClientInfo", clientInfoSchema);
 
-module.exports = ClientInfo;
+export default ClientInfo;
