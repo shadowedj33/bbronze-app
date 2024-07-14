@@ -4,7 +4,7 @@ import Layout from "./components/Layout.jsx";
 import IndexPage from "./pages/IndexPage.jsx";
 import RegisterPage from "./pages/RegisterPage.jsx";
 import axios from "axios";
-import { UserContextProvider } from "./UserContext";
+import { UserContextProvider} from "./UserContext.jsx";
 import ProfilePage from "./pages/ProfilePage.jsx";
 import ReviewsPage from "./pages/ReviewsPage.jsx";
 import ReviewsFormPage from "./pages/ReviewsFormPage.jsx";

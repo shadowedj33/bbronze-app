@@ -1,6 +1,9 @@
 import User from "../models/User.js";
 import jwt from "jsonwebtoken";
 import bcrypt from "bcryptjs";
+import dotenv from 'dotenv';
+
+dotenv.config();
 
 export const register = async (req, res) => {
     try {
@@ -33,7 +36,7 @@ export const login = async (req, res) => {
     const password = req.body.password;
 
     try {
-        const user = await User.findOne({ email });
+        const user = await User.findOne({email});
         if (!user) {
             return res.status(400).json({
                 success: false,
@@ -42,7 +45,7 @@ export const login = async (req, res) => {
         }
 
         const checkPassword = await bcrypt.compare(
-            req.body.password,
+            password,
             user.password
         )
 

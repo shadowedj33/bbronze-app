@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom";
 import { bbronzelogo } from "../assets";
 import { useContext } from "react";
-import { UserContext } from "../UserContext";
+import { UserContext } from "../UserContext.jsx";
 
 export default function Header() {
     const {user} = useContext(UserContext);
