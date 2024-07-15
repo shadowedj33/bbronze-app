@@ -83,4 +83,19 @@ export const login = async (req, res) => {
             message: "Failed to login. Try again.",
         });
     };
-}
+};
+
+export const logout = async (req, res) => {
+    try {
+        res.clearCookie("accessToken");
+        res.status(200).json({
+            success: true,
+            message: "Logged out successfully",
+        });
+    } catch (err) {
+        res.status(500).json({
+            success: false,
+            message: "Failed to logout. Try again.",
+        });
+    };
+};

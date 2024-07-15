@@ -1,51 +1,40 @@
-import { useContext, useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
-import { UserContext } from "../UserContext";
-import config from "../config";
+/* eslint-disable no-unused-vars */
+import React, { useState } from "react";
+import { Link } from "react-router-dom";
+import axios from 'axios';
 
 export default function RegisterPage() {
-    const [credentials, setCredentials] = useState({
-        email: '',
-        password: '',
-    });
+    const [name, setName] = useState('');
+    const [email, setEmail] = useState('');
+    const [phone, setPhone] = useState('');
+    const [password, setPassword] = useState('');
+    const [confirmPassword, setConfirmPassword] = useState('');
 
-    const {dispatch} = useContext(UserContext);
-    const navigate = useNavigate();
-
-    const handleChange = (e) => {
-        setCredentials(prev=>({...prev, [e.target.id]: e.target.value}))
-    };
-
-    const handleClick = async (e) => {
-        e.preventDefault();
-
-        try {
-            const res = await fetch(`${config.VITE_BASE_URL}/register`, {
-                method: 'post',
-                headers: {
-                    'content-type': 'application/json'
-                },
-                body: JSON.stringify(credentials)
-            });
-
-            const result = await res.json();
-
-            if (!res.ok) {
-                alert(result.message);
-            }
-
-            dispatch({ type: 'REGISTER_SUCCESS' });
-            navigate('/login');
-
-        } catch (err) {
-            alert(err.message);
+    async function registerUser(ev) {
+        ev.preventDefault();
+        if (password !== confirmPassword) {
+            alert('Passwords do not match');
+            return;
         }
-    };
+        try {
+            await axios.post('/api/v1/auth/register', {
+                name,
+                email,
+                phone,
+                password,
+                confirmPassword
+            });
+            alert('Registration Successful. You can now log in');    
+        } catch (e) {
+            alert('The email or phone number already exists, please log in or reset your password');
+        }
+        
+    }
 
     return (
         <div className="mt-20 grow items-center justify-around">
             <div className="login-container">
-                <form className="login-box" onSubmit={handleClick}>
+                <form className="login-box" onSubmit={registerUser}>
                     <h2 className="login-title">Register</h2>
                     <div className="mb-4">
                         <label className="login-label" htmlFor="name">
@@ -56,7 +45,8 @@ export default function RegisterPage() {
                             id="name"
                             type="text"
                             placeholder="Jane Doe"
-                            onChange={handleChange}
+                            value={name}
+                            onChange={ev => setName(ev.target.value)}
                         />
                     </div>
                     <div className="mb-4">
@@ -68,7 +58,8 @@ export default function RegisterPage() {
                             id="email"
                             type="email"
                             placeholder="jane@example.com"
-                            onChange={handleChange}
+                            value={email}
+                            onChange={ev => setEmail(ev.target.value)}
                         />
                     </div>
                     <div className="mb-4">
@@ -80,7 +71,8 @@ export default function RegisterPage() {
                             id="phone"
                             type="tel"
                             placeholder="123-456-7890"
-                            onChange={handleChange}
+                            value={phone}
+                            onChange={ev => setPhone(ev.target.value)}
                         />
                     </div>
                     <div className="mb-4">
@@ -92,7 +84,8 @@ export default function RegisterPage() {
                             id="password"
                             type="password"
                             placeholder="******************"
-                            onChange={handleChange}
+                            value={password}
+                            onChange={ev => setPassword(ev.target.value)}
                         />
                     </div>
                     <div className="mb-4">
@@ -104,7 +97,8 @@ export default function RegisterPage() {
                             id="confirmPassword"
                             type="password"
                             placeholder="******************"
-                            onChange={handleChange}
+                            value={confirmPassword}
+                            onChange={ev => setConfirmPassword(ev.target.value)}
                         />
                     </div>
                     <div className="flex items-center justify-between">

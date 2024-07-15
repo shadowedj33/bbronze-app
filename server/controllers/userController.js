@@ -80,6 +80,19 @@ export const getUser = async (req, res) => {
     }
 }
 
+export const getCurrentUser = async (req, res) => {
+    try {
+        const userId = req.user.id;
+        const user = await getUser(userId);
+        res.json(user);
+    } catch (err) {
+        res.status(500).json({
+            success: false,
+            message: 'Failed to retrieve user. Try again.',
+        });
+    }
+}
+
 export const getAllUser = async (req, res) => {
     try {
         const users = await User.find({});
