@@ -19,6 +19,7 @@ const corsOptions = {
     credentials: true,
 };
 
+
 const connect = async () => {
     try {
         await mongoose.connect(process.env.MONGO_URI);
@@ -38,10 +39,12 @@ app.use('/api/v1/review', reviewRoute);
 app.use('/api/v1/clientinfo', clientInfoRoute);
 app.use('/api/v1/booking', bookingRoute);
 
-app.use(cors({
-    origin: 'http://localhost:5173',
-    credentials: true,
-}));
+app.use(
+    cors({
+        origin: 'http://localhost:5173',
+        credentials: true,
+    })
+);
 
 app.listen(port, () => {
     connect();
