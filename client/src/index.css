@@ -84,12 +84,16 @@ textarea {
   flex-direction: column;
   align-items: center;
   gap: 20px;
+  margin: 10px;
 }
 
 .pricing-services-container, .specials-packages-container {
   border: 1px solid;
   padding: 20px;
   border-radius: 5px;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
 }
 
 .services-containers {
@@ -143,4 +147,8 @@ textarea {
 .wordslogo-image {
   position: absolute;
   z-index: 2;
+}
+
+.page-title {
+  @apply text-5xl font-bold font-dscript text-lbrown text-center
 }

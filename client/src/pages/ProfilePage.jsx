@@ -1,30 +1,29 @@
-/* eslint-disable no-unused-vars */
 import { useContext, useState } from "react";
 import { UserContext } from "../UserContext";
-import { Link, Navigate, useParams } from "react-router-dom";
+import { Navigate, useParams } from "react-router-dom";
 import axios from "axios";
 import ReviewsPage from "./ReviewsPage";
 import AccountNav from "../components/AccountNav";
 
 export default function ProfilePage() {
     const [redirect,setRedirect] = useState(null);
-    const {ready,user,setUser} = useContext(UserContext);
+    const { user, ready, getUser } = useContext(UserContext);
     let {subpage} = useParams();
     if (subpage === undefined) {
         subpage = 'profile';
     }
 
     async function logout() {
-        await axios.post('/logout');
+        await axios.post('/api/v1/auth/logout');
         setRedirect('/');
-        setUser(null);
+        getUser(null);
     }
 
     if (!ready) {
         return 'Loading...'
     }
 
-    if (ready && !user && !redirect) {
+    if (ready && !user) {
         return <Navigate to={'/login'} />
     }
 
@@ -37,7 +36,9 @@ export default function ProfilePage() {
             <AccountNav />
             {subpage === 'profile' && (
                 <div className="text-center font-asap max-w-lg mx-auto">
-                    Logged in as {user.name} ({user.email})<br />
+                    <h2>Profile</h2>
+                    <p> Logged in as {user.name}</p>
+                    <p> Email: {user.email}</p><br />
                     <button onClick={logout} className="bg-dblue hover:bg-mblue text-white font-bold px-12 py-2 rounded-full focus:outline-none max-w-sm mt-2">Logout</button>
                 </div>
             )}

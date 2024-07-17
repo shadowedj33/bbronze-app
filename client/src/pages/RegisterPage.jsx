@@ -1,6 +1,7 @@
-import { useState } from "react";
+/* eslint-disable no-unused-vars */
+import React, { useState } from "react";
 import { Link } from "react-router-dom";
-import axios from "axios";
+import axios from 'axios';
 
 export default function RegisterPage() {
     const [name, setName] = useState('');
@@ -16,7 +17,7 @@ export default function RegisterPage() {
             return;
         }
         try {
-            await axios.post('/register', {
+            await axios.post('/api/v1/auth/register', {
                 name,
                 email,
                 phone,

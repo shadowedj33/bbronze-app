@@ -1,124 +1,45 @@
-const express = require("express");
-const cors = require("cors");
-const mongoose = require("mongoose");
-const bcrypt = require("bcrypt");
-const jwt = require("jsonwebtoken");
-const User = require("./models/User");
-const Review = require("./models/Review");
-const cookieParser = require("cookie-parser");
-require("dotenv").config();
+import express from 'express';
+import dotenv from 'dotenv';
+import mongoose from 'mongoose';
+import cors from 'cors';
+import cookieParser from 'cookie-parser';
+import connectDB from './config/db.js';
+
+import authRoute from './routes/auth.js';
+import userRoute from './routes/users.js';
+import serviceRoute from './routes/services.js';
+import reviewRoute from './routes/reviews.js';
+import clientInfoRoute from './routes/clientInfo.js';
+import bookingRoute from './routes/bookings.js';
+
+dotenv.config();
+
+connectDB();
+
 const app = express();
-const bcryptSalt = bcrypt.genSaltSync(10);
-const jwtSecret = process.env.JWT_SECRET;
+const port = process.env.PORT || 3000;
+const corsOptions = {
+    origin: true,
+    credentials: true,
+};
 
 app.use(express.json());
+app.use(cors(corsOptions));
 app.use(cookieParser());
+app.use('/api/v1/auth', authRoute);
+app.use('/api/v1/user', userRoute);
+app.use('/api/v1/services', serviceRoute);
+app.use('/api/v1/review', reviewRoute);
+app.use('/api/v1/clientinfo', clientInfoRoute);
+app.use('/api/v1/booking', bookingRoute);
+
 app.use(
-  cors({
-    credentials: true,
-    origin: "http://localhost:5173",
-  })
+    cors({
+        origin: 'http://localhost:5173',
+        credentials: true,
+    })
 );
 
-mongoose.connect(process.env.MONGO_URL);
-
-app.get("/api/test", (req, res) => {
-  res.json("BBronze Test");
+app.listen(port, () => {
+    console.log(`Server is running on port ${port}`);
 });
-
-app.post("/api/register", async (req, res) => {
-  const { name, email, phone, password } = req.body;
-
-  try {
-    const userDoc = await User.create({
-      name,
-      email,
-      phone,
-      password: bcrypt.hashSync(password, bcryptSalt),
-    });
-    res.json(userDoc);
-  } catch (e) {
-    res.status(422).json(e);
-  }
-});
-
-app.post("/api/login", async (req, res) => {
-  const { email, password } = req.body;
-  const userDoc = await User.findOne({ email });
-  if (userDoc) {
-    const passCor = bcrypt.compareSync(password, userDoc.password);
-    if (passCor) {
-      jwt.sign(
-        {
-          email: userDoc.email,
-          id: userDoc._id,
-          name: userDoc.name,
-          phone: userDoc.phone,
-        },
-        jwtSecret,
-        {},
-        (err, token) => {
-          if (err) throw err;
-          res.cookie("token", token).json("login successful");
-        }
-      );
-    } else {
-      res.status(422).json("invalid password");
-    }
-  } else {
-    res.json("not found");
-  }
-});
-
-app.get("/api/profile", (req, res) => {
-  const { token } = req.cookies;
-  if (token) {
-    jwt.verify(token, jwtSecret, {}, async (err, userData) => {
-      if (err) throw err;
-      const { name, email, phone, _id } = await User.findById(userData.id);
-      res.json({ name, email, phone, _id });
-    });
-  } else {
-    res.json(null);
-  }
-});
-
-app.post("/api/logout", (req, res) => {
-  res.cookie("token", "").json(true);
-});
-
-app.post("/api/reviews", (req, res) => {
-  mongoose.connect(process.env.MONGO_URL);
-  const { token } = req.cookies;
-  const { rating, comment, reviewPhotos, serviceDate, service } = req.body;
-  jwt.verify(token, jwtSecret, {}, async (err, userData) => {
-    if (err) throw err;
-    const reviewDoc = await Review.create({
-      owner: userData.id,
-      rating,
-      comment,
-      reviewPhotos,
-      serviceDate,
-      service,
-    });
-    res.json(reviewDoc);
-  });
-});
-
-app.get("/api/user-reviews", (req, res) => {
-  mongoose.connect(process.env.MONGO_URL);
-  const { token } = req.cookies;
-  jwt.verify(token, jwtSecret, {}, async (err, userData) => {
-    const { id } = userData;
-    res.json(await Review.find({ owner: id }));
-  });
-});
-
-app.get("/api/reviews/:id", async (req, res) => {
-  mongoose.connect(process.env.MONGO_URL);
-  const { id } = req.params;
-  res.json(await Review.findById(id));
-});
-
-
-app.listen(3000);
