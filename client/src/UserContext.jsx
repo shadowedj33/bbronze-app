@@ -10,7 +10,7 @@ export function UserContextProvider({children}) {
     const [ready,setReady] = useState(false);
     useEffect(() => {
         if (!user) {
-            axios.get('/api/v1/user/:id').then(({data}) => {
+            axios.get('/api/v1/user/').then(({data}) => {
                 getUser(data);
                 setReady(true);
             });

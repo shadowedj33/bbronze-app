@@ -3,6 +3,7 @@ import dotenv from 'dotenv';
 import mongoose from 'mongoose';
 import cors from 'cors';
 import cookieParser from 'cookie-parser';
+import connectDB from './config/db.js';
 
 import authRoute from './routes/auth.js';
 import userRoute from './routes/users.js';
@@ -12,21 +13,14 @@ import clientInfoRoute from './routes/clientInfo.js';
 import bookingRoute from './routes/bookings.js';
 
 dotenv.config();
+
+connectDB();
+
 const app = express();
 const port = process.env.PORT || 3000;
 const corsOptions = {
     origin: true,
     credentials: true,
-};
-
-
-const connect = async () => {
-    try {
-        await mongoose.connect(process.env.MONGO_URI);
-        console.log('Connected to MongoDB');
-    } catch (error) {
-        console.error(error);
-    }
 };
 
 app.use(express.json());
@@ -47,6 +41,5 @@ app.use(
 );
 
 app.listen(port, () => {
-    connect();
     console.log(`Server is running on port ${port}`);
 });

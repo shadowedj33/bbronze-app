@@ -41,7 +41,7 @@ export const updateService = async (req, res) => {
 export const deleteService = async (req, res) => {
     const { id } = req.params.id;
     try {
-        await Service.findByIdAndDelete(id);
+        await Service.findbyIdandDelete(id);
         res.status(200).json({
             success: true,
             message: 'Service deleted successfully',
@@ -58,11 +58,7 @@ export const getService = async (req, res) => {
     const { id } = req.params.id;
     try {
         const service = await Service.findById(id);
-        res.status(200).json({
-            success: true,
-            message: 'Service retrieved successfully',
-            data: service,
-        });
+        res.status(200).json(service);
     } catch (err) {
         res.status(500).json({
             success: false,
@@ -71,14 +67,10 @@ export const getService = async (req, res) => {
     }
 };
 
-export const getAllService = async (req, res) => {
+export const getServices = async (req, res) => {
     try {
         const services = await Service.find();
-        res.status(200).json({
-            success: true,
-            message: 'Services retrieved successfully',
-            data: services,
-        });
+        res.status(200).json(services)
     } catch (err) {
         res.status(500).json({
             success: false,
