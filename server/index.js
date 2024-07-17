@@ -4,6 +4,7 @@ import mongoose from 'mongoose';
 import cors from 'cors';
 import cookieParser from 'cookie-parser';
 import connectDB from './config/db.js';
+import bodyParser from 'body-parser';
 
 import authRoute from './routes/auth.js';
 import userRoute from './routes/users.js';
@@ -24,6 +25,8 @@ const corsOptions = {
 };
 
 app.use(express.json());
+app.use(bodyParser.json({ limit: '30mb', extended: true }));
+app.use(bodyParser.urlencoded({ limit: '30mb', extended: true }));
 app.use(cors(corsOptions));
 app.use(cookieParser());
 app.use('/api/v1/auth', authRoute);
