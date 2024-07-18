@@ -12,6 +12,12 @@ import serviceRoute from './routes/services.js';
 import reviewRoute from './routes/reviews.js';
 import clientInfoRoute from './routes/clientInfo.js';
 import bookingRoute from './routes/bookings.js';
+import RateLimit from 'express-rate-limit';
+
+const limiter = RateLimit({
+    windowMs: 15 * 60 * 1000,
+    max: 100,
+});
 
 dotenv.config();
 
@@ -23,7 +29,7 @@ const corsOptions = {
     origin: true,
     credentials: true,
 };
-
+app.use(limiter);
 app.use(express.json());
 app.use(bodyParser.json({ limit: '30mb', extended: true }));
 app.use(bodyParser.urlencoded({ limit: '30mb', extended: true }));
