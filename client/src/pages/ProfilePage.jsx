@@ -1,5 +1,4 @@
-import { useContext, useState } from "react";
-import { UserContext } from "../UserContext";
+import React, { useEffect, useState } from "react";
 import { Navigate, useParams } from "react-router-dom";
 import axios from "axios";
 import ReviewsPage from "./ReviewsPage";
@@ -7,7 +6,7 @@ import AccountNav from "../components/AccountNav";
 
 export default function ProfilePage() {
     const [redirect,setRedirect] = useState(null);
-    const { user, ready, getUser } = useContext(UserContext);
+    const { user, ready, getUser } = useState([]);
     let {subpage} = useParams();
     if (subpage === undefined) {
         subpage = 'profile';

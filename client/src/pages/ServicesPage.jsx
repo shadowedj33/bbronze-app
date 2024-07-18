@@ -26,9 +26,9 @@ export default function ServicesPage() {
     return (
         <div className='services-section'>
             <h1 className="page-title">Services</h1>
-            <ul className='pricing-services-container'>
+            <ul className=''>
                 {services.map((service, index) => (
-                    <li key={index}>
+                    <li className='pricing-services-container' key={index}>
                         <h2 className='font-bold font-asap text-mbrown'>{service.name}</h2>
                         <p>{service.description}</p>
                         <p>Processing Time: {service.processingTime}</p>

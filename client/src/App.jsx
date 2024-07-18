@@ -12,16 +12,12 @@ import BookingPage from "./pages/BookingPage.jsx";
 import ProductsPage from "./pages/ProductsPage.jsx";
 import ServicesPage from "./pages/ServicesPage.jsx";
 import BookingFormPage from "./pages/BookingFormPage.jsx";
-import { UserContextProvider } from "./UserContext.jsx";
-
-
 
 axios.defaults.baseURL = "http://localhost:3000";
 axios.defaults.withCredentials = true;
 
 function App() {
   return (
-    <UserContextProvider>
       <Routes>
         <Route path="/" element={<Layout />}>
           <Route index element={<IndexPage />} />
@@ -37,7 +33,6 @@ function App() {
           <Route path="/services" element={<ServicesPage />} />
         </Route>
       </Routes>
-    </UserContextProvider>
   )
 }
 

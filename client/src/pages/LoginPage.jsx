@@ -1,63 +1,49 @@
-import { useContext, useState } from "react";
-import {Link, Navigate} from "react-router-dom";
+import {Link, useNavigate} from "react-router-dom";
+import { Form, Input, message } from 'antd';
 import axios from "axios";
-import { UserContext } from "../UserContext";
+import { useDispatch } from "react-redux";
+import { showLoading, hideLoading } from '../reducers/features/loadSlice';
 
 export default function LoginPage() {
-    const [email, setEmail] = useState('');
-    const [password, setPassword] = useState('');
-    const [redirect, setRedirect] = useState(false);
-    const {setUser} = useContext(UserContext);
+    const navigate = useNavigate();
+    const dispatch = useDispatch();
     
-    async function handleLoginSubmit(ev) {
-        ev.preventDefault();
+    const handleLoginSubmit = async (values) => {
         try {
-            const {data} = await axios.post('/api/v1/auth/login', {email,password});
-            setUser(data);
-            alert('Login Successful');
-            setRedirect(true);
-        } catch (e) {
-            alert('Invalid email or password');
+            dispatch(showLoading());
+            const res = await axios.post("/api/v1/user/login", values);
+            dispatch(hideLoading());
+            if (res.data.success) {
+                localStorage.setItem("token", res.data.token);
+                message.success("Login Successful");
+                navigate("/");
+            } else {
+                message.error(res.data.message);
+            }
+        } catch (err) {
+            dispatch(hideLoading());
+            console.log(err);
+            message.error('Something went wrong');
         }
-    }
-
-    if (redirect) {
-        return <Navigate to={'/'} />
-    }
+    };
     return (
         <div className="mt-20 grow items-center justify-around">
             <div className='login-container'>
-                <form className='login-box' onSubmit={handleLoginSubmit}>
+                <Form className='login-box' onFinish={handleLoginSubmit}>
                     <h2 className='login-title'>Login</h2>
                     <div className='mb-4'>
-                        <label className='login-label' htmlFor='email'>
-                            Email
-                        </label>
-                        <input 
-                            className='login-input'
-                            id='email'
-                            type='email'
-                            placeholder='your@email.com'
-                            value={email}
-                            onChange={ev => setEmail(ev.target.value)}
-                        />
+                        <Form.Item className='login-label' label='Email' name='email'>
+                            <Input type="email" required />
+                        </Form.Item>
                     </div>
                     <div className='mb-6'>
-                        <label className='login-label' htmlFor='password'>
-                            Password
-                        </label>
-                        <input 
-                            className='login-password-input'
-                            id='password'
-                            type='password'
-                            placeholder='******************'
-                            value={password}
-                            onChange={ev => setPassword(ev.target.value)}
-                        />
+                        <Form.Item className='login-label' label='Password' name='password'>
+                            <Input type="password" required/>
+                        </Form.Item>
                         <p className='password-error'>Please enter your password.</p>
                     </div>
                     <div className='flex items-center justify-between'>
-                        <button className='login-button' type='submit'>
+                        <button className='login-button' type="submit">
                             Sign In
                         </button>
                         <a className='forgot-password-link' href='#'>
@@ -70,7 +56,7 @@ export default function LoginPage() {
                             <Link to={'/register'} className="font-bold font-mblue underline">Register Here</Link>
                         </div>
                     </div>
-                </form>
+                </Form>
             </div>
         </div>
     );

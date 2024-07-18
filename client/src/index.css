@@ -89,11 +89,13 @@ textarea {
 
 .pricing-services-container, .specials-packages-container {
   border: 1px solid;
-  padding: 20px;
+  padding: 10px;
   border-radius: 5px;
   align-items: center;
   justify-content: center;
   text-align: center;
+  margin: 10px;
+  border-color: tan;
 }
 
 .services-containers {

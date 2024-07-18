@@ -1,110 +1,107 @@
 import User from "../models/User.js";
+import bcrypt from "bcryptjs";
+import jwt from "jsonwebtoken";
+import dotenv from 'dotenv';
 
-export const createUser = async (req, res) => {
-    const newUser = new User(req.body)
+dotenv.config();
+
+export const registerUser = async (req, res) => {
     try {
-        const savedUser = await newUser.save();
-        res.status(200).json({
-            success: true,
-            message: 'User created successfully',
-            data: savedUser,
+        const savedUser = await User.findOne({ email: req.body.email });
+        if (savedUser) {
+            return res
+                .status(200)
+                .send({ message: "User already exists, please login", success: false })
+        }
+        const bcryptSalt = bcrypt.genSaltSync(10);
+        const bcryptHash = bcrypt.hashSync(req.body.pasword, bcryptSalt);
+        const newUser = new User({
+            name: req.body.name,
+            email: req.body.email,
+            phone: req.body.phone,
+            password: bcryptHash,
         });
+        
+        await newUser.save();
+        
+        res.status(201).send({ message: "Registration Successful", success: true});
+
     } catch (err) {
-        res.status(500).json({
-            success: true,
-            message: 'User created successfully',
-            data: savedUser,
+        console.log(err);
+        res.status(500).send({
+            message: "Registration failed, please try again",
+            success: false,
         });
     }
-}
+};
 
-export const deleteUser = async (req, res) => {
-    const { id } = req.params.id;
-
+export const loginUser = async (req, res) => {
     try {
-        await userData.findByIdAndDelete(id);
+        const user = await User.findOne({ email: req.body.email });
+        if (!user) {
+            return res
+                .status(200)
+                .send({ message: "User not found, Register now!", success: false })
+        }
+        const checkPassword = await bcrypt.compare(req.body.password, user.password);
+        if (!checkPassword) {
+            return res
+                .status(200)
+                .send({ message: "Invalid email or password", success: false });
+        }
+        const token = jwt.sign({ _id: user._id }, process.env.JWT_SECRET, {
+            expiresIn: "1d",
+        });
+        res.status(200).send({
+            message: "Login Success", 
+            success: true,
+            token: token,   
+        });
+    } catch (err) {
+        console.log(err);
+        res.status(500).send({
+            message: "Login Control error ${err.message}",
+            success: false,
+        });
+    }
+};
+
+export const getUserData = async (req, res) => {
+    try {
+        const user = await User.findById({ _id: req.body.userId });
+        user.password = undefined;
+        if (!user) {
+            return res.status(200).send({
+                message: "User not found",
+                success: false,
+            });
+        } else {
+            res.status(200).send({
+                success: true,
+                data: user,
+            });
+        }
+    } catch (err) {
+        console.log(err);
+        res.status(500).send({
+            message: "Error fetching user data",
+            success: false,
+            err,
+        });
+    }
+};
+
+export const logoutUser = async (req, res) => {
+    try {
+        res.clearCookie("accessToken");
         res.status(200).json({
             success: true,
-            message: 'User deleted successfully',
+            message: "User logged out successfully",
         });
     } catch (err) {
         res.status(500).json({
             success: false,
-            message: 'Failed to delete user. Try again.',
+            message: "Failed to logout user. Try again.",
         });
     }
-}
-
-export const updateUser = async (req, res) => {
-    const { id } =req.params.id
-  
-    try{
-      const updatedUser = await User.findByIdAndUpdate(id,
-        {
-          $set : req.body
-        }, {new: true});
-  
-        res 
-          .status(200)
-          .json({
-              success: true,
-              message: 'Successfully updated User', 
-              data: updatedUser,
-          });
-  
-    }catch(err){
-      res
-       .status(500)
-       .json({
-          success: false,
-          message: "Failed to update.",
-        });
-    }
-}
-
-export const getUser = async (req, res) => {
-    const { id } = req.params.id;
-
-    try {
-        const user = await User.findById(id);
-        res.status(200).json({
-            success: true,
-            message: 'User retrieved successfully',
-            data: user,
-        });
-    } catch (err) {
-        res.status(500).json({
-            success: false,
-            message: 'Failed to retrieve user. Try again.',
-        });
-    }
-}
-
-export const getCurrentUser = async (req, res) => {
-    try {
-        const userId = req.user.id;
-        const user = await getUser(userId);
-        res.json(user);
-    } catch (err) {
-        res.status(500).json({
-            success: false,
-            message: 'Failed to retrieve user. Try again.',
-        });
-    }
-}
-
-export const getAllUser = async (req, res) => {
-    try {
-        const users = await User.find({});
-        res.status(200).json({
-            success: true,
-            message: 'Users retrieved successfully',
-            data: users,
-        });
-    } catch (err) {
-        res.status(500).json({
-            success: false,
-            message: 'Failed to retrieve users. Try again.',
-        });
-    }
-}
+};

@@ -1,25 +1,21 @@
 import express from 'express';
 import {
-    updateUser,
-    deleteUser,
-    getUser,
-    getCurrentUser,
-    getAllUser
+    registerUser,
+    loginUser,
+    getUserData,
+    logoutUser,
+
 } from '../controllers/userController.js';
-import {verifyUser, verifyAdmin} from '../utils/jwt.js';
+import { verifyUser } from '../utils/jwt.js';
 
 const router = express.Router();
 
-router.put('/:id', verifyUser, updateUser);
+router.post('/login', loginUser);
 
-router.delete('/:id', verifyUser, deleteUser);
+router.post('/register', registerUser);
 
-router.get('/:id', verifyUser, getUser);
+router.post('/logout', logoutUser);
 
-router.get('/current-user', verifyUser, getCurrentUser);
-
-router.get('/', verifyAdmin, getAllUser);
-
-
+router.post('/getUserData', verifyUser, getUserData);
 
 export default router;
