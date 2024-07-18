@@ -20,11 +20,7 @@ export const createService = async (req, res) => {
 export const updateService = async (req, res) => {
     const { id } = req.params.id;
     try {
-        const updatedService = await Service.findByIdAndUpdate(id,
-            {
-                $set: req.body,
-            },
-            { new: true })
+        const updatedService = await Service.findByIdAndUpdate({ _id: { $eq: id } });
         res.status(200).json({
             success: true,
             message: 'Service updated successfully',

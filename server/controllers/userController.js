@@ -7,7 +7,8 @@ dotenv.config();
 
 export const registerUser = async (req, res) => {
     try {
-        const savedUser = await User.findOne({ email: req.body.email });
+        let email = req.body.email;
+        const savedUser = await User.findOne({ email: { $eq : email } });
         if (savedUser) {
             return res
                 .status(200)
@@ -37,7 +38,8 @@ export const registerUser = async (req, res) => {
 
 export const loginUser = async (req, res) => {
     try {
-        const user = await User.findOne({ email: req.body.email });
+        let email = req.body.email;
+        const user = await User.findOne({ email: { $eq : email } });
         if (!user) {
             return res
                 .status(200)
@@ -68,7 +70,8 @@ export const loginUser = async (req, res) => {
 
 export const getUserData = async (req, res) => {
     try {
-        const user = await User.findById({ _id: req.body.userId });
+        let id = req.body.id;
+        const user = await User.findById({ _id: { $eq: id } });
         user.password = undefined;
         if (!user) {
             return res.status(200).send({

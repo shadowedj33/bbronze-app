@@ -37,10 +37,7 @@ export const getClientInfo = async (req, res) => {
 export const updateClientInfo = async (req, res) => {
     const { id } = req.params.id;
     try {
-        const updatedClientInfo = await ClientInfo.findByIdAndUpdate(id,
-            {
-                $set : req.body
-            }, {new: true})
+        const updatedClientInfo = await ClientInfo.findByIdAndUpdate({ _id: { $eq : id } });
         res.status(200).json({
             success: true,
             message: "Successfully updated Client Info.",
