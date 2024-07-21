@@ -7,11 +7,11 @@ const initialState = {
 };
 
 const userSlice = createSlice({
-    name: 'user',
+    name: "user",
     initialState,
     reducers: {
         loginSuccess: (state, action) => {
-            state.user = action.payload.user;
+            state.user = action.payload.data;
             state.token = action.payload.token;
             state.authenticated = true;
         },

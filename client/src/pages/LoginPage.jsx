@@ -1,31 +1,22 @@
-import {Link, useNavigate} from "react-router-dom";
-import { Form, Input, message } from 'antd';
+import { Link, useNavigate } from "react-router-dom";
+import { Form, Input, Button } from 'antd';
 import axios from "axios";
 import { useDispatch } from "react-redux";
-import { showLoading, hideLoading } from '../reducers/features/loadSlice';
 import { loginSuccess } from "../reducers/features/userSlice";
+import { showLoading } from "../reducers/features/loadSlice";
 
 export default function LoginPage() {
-    const navigate = useNavigate();
     const dispatch = useDispatch();
+    const navigate = useNavigate();
     
     const handleLoginSubmit = async (values) => {
         try {
             dispatch(showLoading());
-            const res = await axios.post("/api/v1/user/login", values);
-            dispatch(hideLoading());
-            if (res.data.success) {
-                localStorage.setItem("token", res.data.token);
-                dispatch(loginSuccess(res.data.user));
-                message.success("Login successful");
-                navigate("/account");
-            } else {
-                message.error(res.data.message);
-            }
+            const res = await axios.post('/api/v1/user/login', values);
+            dispatch(loginSuccess(res.data));
+            navigate('/account', { replace: true });
         } catch (err) {
-            dispatch(hideLoading());
             console.log(err);
-            message.error('Something went wrong');
         }
     };
     return (
@@ -45,9 +36,9 @@ export default function LoginPage() {
                         <p className='password-error'>Please enter your password.</p>
                     </div>
                     <div className='flex items-center justify-between'>
-                        <button className='login-button' type="submit">
+                        <Button className='login-button' type="primary" htmlType="submit">
                             Sign In
-                        </button>
+                        </Button>
                         <a className='forgot-password-link' href='#'>
                             Forgot Password?
                         </a>

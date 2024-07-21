@@ -42,7 +42,7 @@ export const loginUser = async (req, res) => {
         const user = await User.findOne({ email: { $eq : email } });
         if (!user) {
             return res
-                .status(200)
+                .status(401)
                 .send({ message: "User not found, Register now!", success: false })
         }
         const checkPassword = await bcrypt.compare(req.body.password, user.password);
@@ -57,7 +57,8 @@ export const loginUser = async (req, res) => {
         res.status(200).send({
             message: "Login Success", 
             success: true,
-            token: token,   
+            token: token,
+            data: user,
         });
     } catch (err) {
         console.log(err);
