@@ -1,4 +1,7 @@
-import { Route, Routes } from "react-router-dom";
+import { BrowserRouter, Route, Routes } from "react-router-dom";
+import React from "react";
+import { Provider } from "react-redux";
+import store from "./reducers/store.js";
 import LoginPage from "./pages/LoginPage.jsx";
 import Layout from "./components/Layout.jsx";
 import IndexPage from "./pages/IndexPage.jsx";
@@ -18,22 +21,26 @@ axios.defaults.withCredentials = true;
 
 function App() {
   return (
-      <Routes>
-        <Route path="/" element={<Layout />}>
-          <Route index element={<IndexPage />} />
-          <Route path="/login" element={<LoginPage />} />
-          <Route path="/register" element={<RegisterPage />} />
-          <Route path="/account" element={<ProfilePage />} />
-          <Route path="/account/reviews" element={<ReviewsPage />} />
-          <Route path="/account/reviews/new" element={<ReviewsFormPage />} />
-          <Route path="/account/bookings" element={<BookingsPage />} />
-          <Route path="/booking" element={<BookingPage />} />
-          <Route path="/booking/new" element={<BookingFormPage />} />
-          <Route path="/products" element={<ProductsPage />} />
-          <Route path="/services" element={<ServicesPage />} />
-        </Route>
-      </Routes>
-  )
+    <Provider store={store}>
+      <BrowserRouter>
+        <Routes>
+          <Route path="/" element={<Layout />}>
+            <Route index element={<IndexPage />} />
+            <Route path="/login" element={<LoginPage />} />
+            <Route path="/register" element={<RegisterPage />} />
+            <Route path="/account" element={<ProfilePage />} />
+            <Route path="/account/reviews" element={<ReviewsPage />} />
+            <Route path="/account/reviews/new" element={<ReviewsFormPage />} />
+            <Route path="/account/bookings" element={<BookingsPage />} />
+            <Route path="/booking" element={<BookingPage />} />
+            <Route path="/booking/new" element={<BookingFormPage />} />
+            <Route path="/products" element={<ProductsPage />} />
+            <Route path="/services" element={<ServicesPage />} />
+          </Route>
+        </Routes>
+      </BrowserRouter>
+    </Provider>
+  );
 }
 
 export default App

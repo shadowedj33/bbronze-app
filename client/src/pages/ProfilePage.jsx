@@ -5,29 +5,48 @@ import ReviewsPage from "./ReviewsPage";
 import AccountNav from "../components/AccountNav";
 
 export default function ProfilePage() {
-    const [redirect,setRedirect] = useState(null);
-    const { user, ready, getUser } = useState([]);
+    const [user, setUser] = useState(null);
+    const [loading, setLoading] = useState(true);
     let {subpage} = useParams();
     if (subpage === undefined) {
         subpage = 'profile';
     }
 
+    useEffect(() => {
+        const getUserData = async () => {
+            try {
+                const res = await axios.get(
+                    '/api/v1/user/getUserData',
+                    {
+                        headers: {
+                            Authorization: "Bearer " + localStorage.getItem("token"),
+                        },
+                    }
+                );
+                if (res.data.success) {
+                    setUser(res.data.data);
+                    setLoading(false);
+                }
+            } catch (err) {
+                console.log(err);
+                setLoading(false);
+            }
+        };
+        getUserData();
+    }, []);
+
     async function logout() {
         await axios.post('/api/v1/auth/logout');
-        setRedirect('/');
-        getUser(null);
+        localStorage.removeItem("token");
+        setUser(null);
     }
 
-    if (!ready) {
+    if (loading) {
         return 'Loading...'
     }
 
-    if (ready && !user) {
+    if (!user) {
         return <Navigate to={'/login'} />
-    }
-
-    if (redirect) {
-        return <Navigate to={redirect} />
     }
 
     return(

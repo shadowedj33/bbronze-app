@@ -3,6 +3,7 @@ import { Form, Input, message } from 'antd';
 import axios from "axios";
 import { useDispatch } from "react-redux";
 import { showLoading, hideLoading } from '../reducers/features/loadSlice';
+import { loginSuccess } from "../reducers/features/userSlice";
 
 export default function LoginPage() {
     const navigate = useNavigate();
@@ -15,8 +16,9 @@ export default function LoginPage() {
             dispatch(hideLoading());
             if (res.data.success) {
                 localStorage.setItem("token", res.data.token);
-                message.success("Login Successful");
-                navigate("/");
+                dispatch(loginSuccess(res.data.user));
+                message.success("Login successful");
+                navigate("/account");
             } else {
                 message.error(res.data.message);
             }
@@ -32,13 +34,13 @@ export default function LoginPage() {
                 <Form className='login-box' onFinish={handleLoginSubmit}>
                     <h2 className='login-title'>Login</h2>
                     <div className='mb-4'>
-                        <Form.Item className='login-label' label='Email' name='email'>
-                            <Input type="email" required />
+                        <Form.Item className='login-label' id='email' label='Email' name='email'>
+                            <Input type="email" autoComplete="email" required />
                         </Form.Item>
                     </div>
                     <div className='mb-6'>
                         <Form.Item className='login-label' label='Password' name='password'>
-                            <Input type="password" required/>
+                            <Input type="password" autoComplete="password" required/>
                         </Form.Item>
                         <p className='password-error'>Please enter your password.</p>
                     </div>

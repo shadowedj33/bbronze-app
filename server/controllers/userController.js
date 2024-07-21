@@ -70,27 +70,23 @@ export const loginUser = async (req, res) => {
 
 export const getUserData = async (req, res) => {
     try {
-        let id = req.body.id;
-        const user = await User.findById({ _id: { $eq: id } });
-        user.password = undefined;
-        if (!user) {
-            return res.status(200).send({
-                message: "User not found",
-                success: false,
-            });
-        } else {
-            res.status(200).send({
-                success: true,
-                data: user,
-            });
+        const token = req.headers.authorization;
+        if (!token) {
+            return res.status(401).send({ message: "Unauthorized", success: false });
         }
+
+        const decoded = jwt.verify(token, process.env.JWT_SECRET);
+        const userId = decoded._id;
+
+        const user = await User.findById(userId).select('-password -_v -createdAt');
+        if (!user) {
+            return res.status(404).send({ message: "User not found", success: false });
+        }
+
+        res.status(200).send({ data: user, success: true });
     } catch (err) {
         console.log(err);
-        res.status(500).send({
-            message: "Error fetching user data",
-            success: false,
-            err,
-        });
+        res.status(500).send({ message: "Error fetching user data", success: false, err });
     }
 };
 

@@ -6,7 +6,7 @@ import {
     logoutUser,
 
 } from '../controllers/userController.js';
-import { verifyUser } from '../utils/jwt.js';
+import authMiddleware from "../utils/authMiddleware.js"
 
 const router = express.Router();
 
@@ -16,6 +16,6 @@ router.post('/register', registerUser);
 
 router.post('/logout', logoutUser);
 
-router.post('/getUserData', verifyUser, getUserData);
+router.post('/getUserData', authMiddleware, getUserData);
 
 export default router;
