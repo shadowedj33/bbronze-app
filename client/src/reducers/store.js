@@ -1,10 +1,12 @@
 import { configureStore } from "@reduxjs/toolkit";
-import { userSlice } from "./features/userSlice";
-import { loadSlice } from "./features/loadSlice";
+import userReducer from "./features/userSlice";
+import loadReducer from "./features/loadSlice";
 
-export default configureStore({
+const store = configureStore({
     reducer: {
-        user: userSlice.reducer,
-        load: loadSlice.reducer,
+        user: userReducer,
+        load: loadReducer,
     },
 });
+
+export default store;
