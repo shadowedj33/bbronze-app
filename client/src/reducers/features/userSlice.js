@@ -1,9 +1,21 @@
-import { createSlice } from '@reduxjs/toolkit';
+import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
+
+export const getUserData = createAsyncThunk(
+    'user/getUserData',
+    async () => {
+        const response = await fetch('/api/v1/user/getUserData');
+        const data = await response.json();
+        return data;
+    }
+);
 
 const initialState = {
     user: null,
     token: null,
     authenticated: false,
+    name: null,
+    email: null,
+    phone: null,
 };
 
 const userSlice = createSlice({
@@ -14,14 +26,22 @@ const userSlice = createSlice({
             state.user = action.payload.data;
             state.token = action.payload.token;
             state.authenticated = true;
+            state.name = action.payload.data.name;
+            state.email = action.payload.data.email;
+            state.phone = action.payload.data.phone;
         },
         logout: (state) => {
             state.user = null;
             state.token = null;
             state.authenticated = false;
         },
+        getUserDataSuccess: (state, action) => {
+            state.name = action.payload.name;
+            state.email = action.payload.email;
+            state.phone = action.payload;
+        },
     },
 });
 
-export const { loginSuccess, logout } = userSlice.actions;
+export const { loginSuccess, getUserDataSuccess, logout } = userSlice.actions;
 export default userSlice.reducer;
