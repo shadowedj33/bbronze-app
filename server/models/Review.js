@@ -2,10 +2,6 @@ import mongoose from "mongoose";
 
 const reviewSchema = new mongoose.Schema(
   {
-    serviceId: {
-      type: mongoose.Types.ObjectId,
-      ref: "Service",
-    },
     owner: {
       type: mongoose.Types.ObjectId,
       ref: "User",

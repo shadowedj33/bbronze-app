@@ -5,7 +5,6 @@ import cors from 'cors';
 import cookieParser from 'cookie-parser';
 import connectDB from './config/db.js';
 import bodyParser from 'body-parser';
-import lusca from 'lusca';
 
 import authRoute from './routes/auth.js';
 import userRoute from './routes/users.js';
@@ -36,13 +35,14 @@ app.use(bodyParser.json({ limit: '30mb', extended: true }));
 app.use(bodyParser.urlencoded({ limit: '30mb', extended: true }));
 app.use(cors(corsOptions));
 app.use(cookieParser());
+
 app.use('/api/v1/auth', authRoute);
 app.use('/api/v1/user', userRoute);
 app.use('/api/v1/services', serviceRoute);
 app.use('/api/v1/review', reviewRoute);
 app.use('/api/v1/clientinfo', clientInfoRoute);
 app.use('/api/v1/booking', bookingRoute);
-app.use(lusca.csrf());
+
 
 app.use(
     cors({

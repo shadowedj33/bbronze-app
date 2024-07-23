@@ -40,8 +40,13 @@ const userSlice = createSlice({
             state.email = action.payload.email;
             state.phone = action.payload;
         },
+        setToken: (state, action) => {
+            state.token = action.payload;
+        }
     },
 });
 
-export const { loginSuccess, getUserDataSuccess, logout } = userSlice.actions;
+export const { loginSuccess, getUserDataSuccess, logout, setToken } = userSlice.actions;
+
+export const selectToken = (state) => state.user.token;
 export default userSlice.reducer;

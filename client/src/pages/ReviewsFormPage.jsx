@@ -1,23 +1,25 @@
 /* eslint-disable no-unused-vars */
 import React, { useEffect, useState } from "react";
-import { Navigate, useParams } from "react-router-dom";
+import { Navigate, useNavigate, useParams } from "react-router-dom";
 import RatingReview from "../components/RatingReview";
 import axios from "axios";
+import { useDispatch, useSelector } from "react-redux";
 
 export default function ReviewsFormPage() {
-    const { id } = useParams();
+    const user = useSelector((state) => state.user);
     const [rating, setRating] = useState(0);
     const [comment, setComment] = useState('');
     const [reviewPhotos, setReviewPhotos] = useState([]);
     const [serviceDate, setServiceDate] = useState('');
     const [service, setService] = useState('');
-    const [redirect, setRedirect] = useState(false);
+    const navigate = useNavigate();
+    const dispatch = useDispatch();
 
     useEffect(() => {
-        if (!id) {
+        if (!user) {
             return;
         }
-        axios.get('/reviews/'+id).then(response => {
+        axios.get('/api/v1/review').then(response => {
             const {data} = response;
             setRating(data.rating);
             setComment(data.comment);
@@ -25,7 +27,7 @@ export default function ReviewsFormPage() {
             setServiceDate(data.serviceDate);
             setService(data.service);
         });
-    }, [id]);
+    }, [user]);
 
     function handleClick() {
         const fileInput = document.createElement('input');
@@ -46,21 +48,17 @@ export default function ReviewsFormPage() {
             serviceDate,
             service,
         };
-        if (id) {
-            await axios.put('/reviews', {
-                id,
+        if (user) {
+            await axios.put('/api/v1/review', {
+                user,
                 ...reviewData
             });
-            setRedirect(true);
+            dispatch(saveReview)
+            navigate('/account/reviews');
         } else {
-            await axios.post('/reviews', reviewData);
-            setRedirect(true);
+            await axios.post('/api/v1/review', reviewData);
         }
-
-    }
-
-    if (redirect) {
-        return <Navigate to={'/account/reviews'} />
+        navigate('/account/reviews');
     }
 
     return (
