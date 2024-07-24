@@ -12,8 +12,6 @@ export default function ProfilePage() {
     const dispatch = useDispatch();
     const navigate = useNavigate();
 
-    console.log("User object:", user);
-
     let {subpage} = useParams();
     subpage = subpage || 'profile';
 

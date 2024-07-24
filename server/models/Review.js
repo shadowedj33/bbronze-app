@@ -2,6 +2,11 @@ import mongoose from "mongoose";
 
 const reviewSchema = new mongoose.Schema(
   {
+    userId: {
+      type: mongoose.Types.ObjectId,
+      ref: "User",
+      required: true,
+    },
     owner: {
       type: mongoose.Types.ObjectId,
       ref: "User",

@@ -28,6 +28,12 @@ const userSchema = new mongoose.Schema(
       type: String,
       default: "user",
     },
+    reviews: [
+      {
+        type: mongoose.Types.ObjectId,
+        ref: "Review",
+      },
+    ],
   },
   { timestamps: true }
 );

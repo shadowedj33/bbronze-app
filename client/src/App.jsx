@@ -1,8 +1,6 @@
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 // eslint-disable-next-line no-unused-vars
 import React from "react";
-import { Provider } from "react-redux";
-import store from "./store/store.js";
 import LoginPage from "./pages/LoginPage.jsx";
 import Layout from "./components/Layout.jsx";
 import IndexPage from "./pages/IndexPage.jsx";
@@ -22,7 +20,7 @@ axios.defaults.withCredentials = true;
 
 function App() {
   return (
-    <Provider store={store}>
+    <>
       <BrowserRouter>
         <Routes>
           <Route path="/" element={<Layout />}>
@@ -40,7 +38,7 @@ function App() {
           </Route>
         </Routes>
       </BrowserRouter>
-    </Provider>
+    </>
   );
 }
 

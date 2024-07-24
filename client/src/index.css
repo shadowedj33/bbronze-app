@@ -95,7 +95,8 @@ textarea {
   justify-content: center;
   text-align: center;
   margin: 10px;
-  border-color: tan;
+  border-color: #8d7373;
+  background-color: #8d7373;
 }
 
 .services-containers {

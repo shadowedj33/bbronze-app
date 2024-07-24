@@ -7,6 +7,6 @@ const router = express.Router();
 
 router.post('/', verifyUser, createReview);
 
-router.get('/reviews', authMiddleware, getUserReview);
+router.get('/reviews/:userId', authMiddleware, getUserReview);
 
 export default router;

@@ -1,42 +1,45 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 import axios from 'axios';
 
-// Define the initial state
-const initialState = {
-  reviews: [],
-  status: 'idle',
-  error: null,
-};
-
-// Define the thunk to fetch reviews
-export const getUserReviews = createAsyncThunk('reviews/getUserReviews', async (userId) => {
-  try {
-    const response = await axios.get(`/api/reviews?owner=${userId}`);
-    return response.data;
-  } catch (error) {
-    return error;
+export const getUserReviews = createAsyncThunk(
+  'reviews/getUserReviews',
+  async (userId, thunkAPI) => {
+    try { 
+      const res = await axios.get(`/api/review/reviews/${userId}`);
+      return res.data;
+    } catch (err) {
+      return thunkAPI.rejectWithValue({ error: err.message });
+    }
   }
-});
+);
 
-// Define the slice
 const reviewSlice = createSlice({
   name: 'reviews',
-  initialState,
-  reducers: {},
+  initialState: {
+    reviews: [],
+    isLoading: null,
+    error: null,
+  },
+  reducers: {
+    addReview: (state, action) => {
+      state.reviews.push(action.payload);
+    },
+  },
   extraReducers: (builder) => {
     builder
       .addCase(getUserReviews.pending, (state) => {
-        state.status = 'loading';
+        state.isLoading = true;
       })
       .addCase(getUserReviews.fulfilled, (state, action) => {
+        state.isLoading = false;
         state.reviews = action.payload;
-        state.status = 'succeeded';
       })
       .addCase(getUserReviews.rejected, (state, action) => {
-        state.status = 'failed';
-        state.error = action.error.message;
+        state.isLoading = false;
+        state.error = action.payload ? action.payload.message : 'Could not fetch reviews';
       });
   },
 });
 
+export const { addReview } = reviewSlice.actions;
 export default reviewSlice.reducer;

@@ -3,24 +3,23 @@ import React, { useEffect } from "react";
 import { Link } from "react-router-dom";
 import AccountNav from "../components/AccountNav";
 import { useDispatch, useSelector } from "react-redux";
-import { getUserData } from "../features/user/userSlice";
 import { getUserReviews } from "../features/review/reviewSlice";
 import { showLoading } from "../features/loadSlice";
 
 
 export default function ReviewsPage() {
     const dispatch = useDispatch();
+    const { reviews, isLoading } = useSelector((state) => state.review);
     const user = useSelector((state) => state.user.user);
-    const reviews = useSelector((state) => state.user.review);
-    const isLoading = useSelector((state) => state.loading ==="pending");
 
     useEffect(() => {
-        dispatch(getUserData(user._id));
-        dispatch(getUserReviews(user._id));
-    }, [dispatch, user._id]);
+        if (user && user._id) {
+            dispatch(getUserReviews(user._id));
+        }
+    }, [dispatch, user]);
 
     if (isLoading) {
-        showLoading;
+        return <p>Loading reviews...</p>;
     }
 
     return (
@@ -35,18 +34,19 @@ export default function ReviewsPage() {
                 </Link>
             </div>
             <div>
-                <h2 className="">My Reviews</h2>
-                <ul>
-                    {reviews.map((review) => (
-                        <li key={review._id}>
+                <h2>My Reviews</h2>
+                {reviews.length > 0 ? (
+                    reviews.map((review) => (
+                        <div key={review._id}>
                             <p>Rating: {review.rating}</p>
                             <p>Comment: {review.comment}</p>
                             <p>Service: {review.service}</p>
                             <p>Service Date: {review.serviceDate}</p>
-                            <p>Posted On: {review.createdAt}</p>
-                        </li>
-                    ))}
-                </ul>
+                        </div>
+                    ))
+                ) : (
+                    <p>No reviews found.</p>
+                )}
             </div>
         </div>
     );
