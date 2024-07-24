@@ -2,8 +2,8 @@ import { Link, useNavigate } from "react-router-dom";
 import { Form, Input, Button } from 'antd';
 import axios from "axios";
 import { useDispatch } from "react-redux";
-import { loginSuccess } from "../reducers/features/userSlice";
-import { showLoading } from "../reducers/features/loadSlice";
+import { loginSuccess } from "../features/user/userSlice";
+import { showLoading } from "../features/loadSlice";
 
 export default function LoginPage() {
     const dispatch = useDispatch();

@@ -5,7 +5,7 @@ import axios from "axios";
 import ReviewsPage from "./ReviewsPage";
 import AccountNav from "../components/AccountNav";
 import { useDispatch, useSelector } from "react-redux";
-import { logout } from "../reducers/features/userSlice";
+import { logout } from "../features/user/userSlice";
 
 export default function ProfilePage() {
     const user = useSelector((state) => state.user);

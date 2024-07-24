@@ -1,27 +1,26 @@
 /* eslint-disable no-unused-vars */
 import React, { useEffect } from "react";
-import { Link, useParams } from "react-router-dom";
+import { Link } from "react-router-dom";
 import AccountNav from "../components/AccountNav";
 import { useDispatch, useSelector } from "react-redux";
-import { getUserReviews } from "../reducers/features/reviewSlice";
+import { getUserData } from "../features/user/userSlice";
+import { getUserReviews } from "../features/review/reviewSlice";
+import { showLoading } from "../features/loadSlice";
 
 
 export default function ReviewsPage() {
     const dispatch = useDispatch();
-    const reviews = useSelector((state) => state.review.reviews);
-    const status = useSelector((state) => state.review.status);
-    const error = useSelector((state) => state.review.error);
+    const user = useSelector((state) => state.user.user);
+    const reviews = useSelector((state) => state.user.review);
+    const isLoading = useSelector((state) => state.loading ==="pending");
 
     useEffect(() => {
-        dispatch(getUserReviews());
-    }, [dispatch]);
+        dispatch(getUserData(user._id));
+        dispatch(getUserReviews(user._id));
+    }, [dispatch, user._id]);
 
-    if (status === 'loading') {
-        return <div>Loading...</div>;
-    }
-
-    if (error) {
-        return <div>Error: {error.message}</div>;
+    if (isLoading) {
+        showLoading;
     }
 
     return (
@@ -38,13 +37,15 @@ export default function ReviewsPage() {
             <div>
                 <h2 className="">My Reviews</h2>
                 <ul>
-                    <li key={reviews.id}>
-                        <p>Rating: {reviews.rating}</p>
-                        <p>Comment: {reviews.comment}</p>
-                        <p>Service: {reviews.service}</p>
-                        <p>Service Date: {reviews.serviceDate}</p>
-                        <p>Posted On: {reviews.createdAt}</p>
-                    </li>
+                    {reviews.map((review) => (
+                        <li key={review._id}>
+                            <p>Rating: {review.rating}</p>
+                            <p>Comment: {review.comment}</p>
+                            <p>Service: {review.service}</p>
+                            <p>Service Date: {review.serviceDate}</p>
+                            <p>Posted On: {review.createdAt}</p>
+                        </li>
+                    ))}
                 </ul>
             </div>
         </div>

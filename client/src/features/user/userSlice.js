@@ -12,6 +12,7 @@ export const getUserData = createAsyncThunk(
 const initialState = {
     user: null,
     token: null,
+    reviews: [],
     authenticated: false,
     name: null,
     email: null,
@@ -29,6 +30,7 @@ const userSlice = createSlice({
             state.name = action.payload.data.name;
             state.email = action.payload.data.email;
             state.phone = action.payload.data.phone;
+            state.reviews = action.payload.reviews;
         },
         logout: (state) => {
             state.user = null;
@@ -43,7 +45,7 @@ const userSlice = createSlice({
         setToken: (state, action) => {
             state.token = action.payload;
         }
-    },
+    }
 });
 
 export const { loginSuccess, getUserDataSuccess, logout, setToken } = userSlice.actions;
