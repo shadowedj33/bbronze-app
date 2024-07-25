@@ -25,13 +25,13 @@ Follow these steps to set up the project locally on your machine.
 - npm
 
 ### Cloning the repository
-'''bash
+'''
 git clone https://github.com/shadowedj33/bbronze-app.git
 cd bbronze-app/
 '''
 
 ### Installation
-'''bash
+'''
 npm install
 '''
 
@@ -43,13 +43,13 @@ JWT_SECRET=
 
 **Split the terminal to the server**
 **Host server on port 3000**
-'''bash
+'''
 cd bbronze-app/server
 npm run dev
 '''
 
 **In other terminal, enter client**
-'''bash
+'''
 cd bbronze-app/client
 npm run dev
 '''
