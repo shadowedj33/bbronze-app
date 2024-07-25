@@ -1,4 +1,4 @@
-# BBronze MERN Online Mobile Spray Tanning Appointment Booking Application
+# BBronze  Online Mobile Spray Tanning Booking Application
 
 ## Description
 BBronze is a MERN stack application designed to simplify the process of booking mobile spray tanning appointments. It provides an intuitive interface for customers to schedule appointments, and a robust backend for administrators to manage bookings.
@@ -9,14 +9,51 @@ BBronze is a MERN stack application designed to simplify the process of booking 
 - Appointment Management: Administrators can view, confirm, or cancel appointments.
 - Mobile Friendly: Designed with a mobile-first approach for easy access on the go.
 
-## Technologies Used
-- MongoDB: A NoSQL database used to store user and appointment data.
-- Express.js: A web application framework for Node.js used to build the API.
-- React.js: A JavaScript library used to build the user interface.
-- Node.js: A JavaScript runtime used to build fast and scalable network applications.
+## Tech Stack
+- MongoDB
+- Express.js
+- React.js
+- Node.js
+- TaildwindCSS
 
-## Contributing
-We welcome contributions from the community. Please read our contributing guidelines before submitting any pull requests.
+## Quick Start
+Follow these steps to set up the project locally on your machine.
+
+### Prerequeisites:
+- Git
+- Node.js
+- npm
+
+### Cloning the repository
+'''bash
+git clone https://github.com/shadowedj33/bbronze-app.git
+cd bbronze-app/
+'''
+
+### Installation
+'''bash
+npm install
+'''
+
+** .env in server root **
+'''env
+mongo_URI=
+JWT_SECRET=
+'''
+
+**Split the terminal to the server**
+**Host server on port 3000**
+'''bash
+cd bbronze-app/server
+npm run dev
+'''
+
+**In other terminal, enter client**
+'''bash
+cd bbronze-app/client
+npm run dev
+'''
+
 
 ## License
 This project is licensed under the MIT License. See the LICENSE file for details.
