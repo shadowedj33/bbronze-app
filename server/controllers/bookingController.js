@@ -1,18 +1,29 @@
 import Booking from '../models/Booking.js';
 
 export const createBooking = async (req, res) => {
-    const newBooking = new Booking(req.body);
+    const { user, name, email, phone, serviceBooking, addOnsBooking, date, location, time, status } = req.body;
     try {
-        const savedBooking = await newBooking.save();
-        res.status(200).json({
+        const booking = await Booking.create({
+            user,
+            name,
+            email,
+            phone,
+            serviceBooking,
+            addOnsBooking,
+            date,
+            location,
+            time,
+            status
+        });
+        res.status(201).json({
             success: true,
-            message: "Booking successful.",
-            data: savedBooking
+            message: "Successfully created booking.",
+            data: booking
         });
     } catch (err) {
         res.status(500).json({
             success: false,
-            message: "Failed to book. Try again."
+            message: "Failed to create booking."
         });
     }
 };
@@ -49,3 +60,7 @@ export const getAllBooking = async (req, res) => {
         });
     }
 };
+
+export const postbooking = async (req, res) => {
+    
+}

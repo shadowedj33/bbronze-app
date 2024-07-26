@@ -29,10 +29,10 @@ export default function ServicesPage() {
             <ul className=''>
                 {services.map((service, index) => (
                     <li className='pricing-services-container' key={index}>
-                        <h2 className='font-bold font-asap text-dblue'>{service.name}</h2>
-                        <p>{service.description}</p>
-                        <p>Processing Time: {service.processingTime}</p>
-                        <p>${service.price}</p>
+                        <h2 className='font-bold font-mplus text-lbrown'>{service.name}</h2>
+                        <p className='font-asap text-lbrown'>{service.description}</p>
+                        <p className='font-asap text-lbrown'>Processing Time: {service.processingTime}</p>
+                        <p className='font-asap text-lbrown'>${service.price}</p>
                     </li>
                 ))}
             </ul>
@@ -40,10 +40,10 @@ export default function ServicesPage() {
             <ul className='pricing-services-container'>
                 {addOns.map((addOn, index) => (
                     <li key={index}>
-                        <h2 className='font-bold font-asap text-lblue'>{addOn.name}</h2>
-                        <p className=''>{addOn.description}</p>
-                        <p>${addOn.price}</p>
-                        <p>Processing Time: {addOn.processingTime}</p>
+                        <h2 className='font-bold font-mplus text-mblue'>{addOn.name}</h2>
+                        <p className='font-asap text-lbrown'>{addOn.description}</p>
+                        <p className='font-asap text-lbrown'>Add-on Time: {addOn.processingTime}</p>
+                        <p className='font-asap text-lbrown'>${addOn.price}</p>
                     </li>
                 ))}
             </ul>

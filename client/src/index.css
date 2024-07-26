@@ -95,8 +95,8 @@ textarea {
   justify-content: center;
   text-align: center;
   margin: 10px;
-  border-color: #8d7373;
-  background-color: #8d7373;
+  background-color: #d3c785;
+  border-color: #d3c785;
 }
 
 .services-containers {
@@ -154,4 +154,12 @@ textarea {
 
 .page-title {
   @apply text-5xl font-bold font-dscript text-lbrown text-center
+}
+
+.bookingform-input {
+  @apply bg-lblue border-lblue font-mplus text-lbrown mt-1 mb-2
+}
+
+.bookingform-label {
+  @apply font-mplus text-lblue text-xl
 }

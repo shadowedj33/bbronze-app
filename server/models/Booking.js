@@ -5,12 +5,25 @@ const bookingSchema = new mongoose.Schema(
     user: {
       type: mongoose.Types.ObjectId,
       ref: "User",
+    },
+    name: {
+      type: String,
       required: true,
     },
-    service: {
-      type: mongoose.Types.ObjectId,
-      ref: "Service",
+    email: {
+      type: String,
       required: true,
+    },
+    phone: {
+      type: String,
+      required: true,
+    },
+    serviceBooking: {
+      type: String,
+      required: true,
+    },
+    addOnsBooking: {
+      type: String,
     },
     date: {
       type: Date,
@@ -29,11 +42,6 @@ const bookingSchema = new mongoose.Schema(
       required: true,
       enum: ["pending", "confirmed", "cancelled"],
       default: "pending",
-    },
-    clientInfo: {
-      type: mongoose.Types.ObjectId,
-      ref: "ClientInfo",
-      required: true,
     },
   },
   { timestamps: true }
